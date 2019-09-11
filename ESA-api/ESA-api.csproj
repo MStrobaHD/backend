@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>ESA_api</RootNamespace>
+    <UserSecretsId>ed63938f-81d1-4ac9-9823-1c00a359715e</UserSecretsId>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\Common\BadgeController\" />
+    <Folder Include="Controllers\Common\Enrolments\" />
+    <Folder Include="Controllers\Education\ExamController\" />
+    <Folder Include="Controllers\Education\LessonController\" />
+    <Folder Include="Controllers\Education\FlashcardSetController\" />
+    <Folder Include="Controllers\Education\FlashcardController\" />
+    <Folder Include="Controllers\Judgement\" />
+    <Folder Include="Controllers\UserAction\NormalUser\" />
+    <Folder Include="Controllers\UserAction\PriviligedUser\" />
+    <Folder Include="Mapping\DTO\EducationDTO\ExamsDTO\" />
+    <Folder Include="Mapping\DTO\EducationDTO\LessonsDTO\" />
+    <Folder Include="Repositories\Judge\ComplexityRepository\" />
+    <Folder Include="Repositories\Judge\LevelRepository\" />
+    <Folder Include="Repositories\Judge\RestrictionRepository\" />
+    <Folder Include="Repositories\Judge\VerificationDataRepository\" />
+    <Folder Include="Repositories\Judge\VerdictRepository\" />
+    <Folder Include="Repositories\Judge\SolutionRepository\" />
+    <Folder Include="Repositories\UserRepository\AdminUser\" />
+    <Folder Include="Services\Common\BadgeService\" />
+    <Folder Include="Services\Education\ExamService\" />
+    <Folder Include="Services\Education\LessonService\" />
+    <Folder Include="Services\Education\FlashcardService\" />
+    <Folder Include="Services\Education\FlashcardSetService\" />
+    <Folder Include="Services\Judge\" />
+    <Folder Include="Services\UserAction\" />
+  </ItemGroup>
+
+</Project>
