@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Education.ExamRepository
 {
-    interface IExamRepository
+    public interface IExamRepository
     {
         Task<List<Exam>> GetExamsAsync();
         Task<Exam> GetExamAsync(int examId);

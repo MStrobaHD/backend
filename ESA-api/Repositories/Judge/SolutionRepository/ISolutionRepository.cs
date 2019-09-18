@@ -1,11 +1,20 @@
-﻿using System;
+﻿using ESA_api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ESA_api.Repositories.Judge.ISolutionRepository
+namespace ESA_api.Repositories.Judge.SolutionRepository
 {
-    interface SolutionRepository
+    interface ISolutionRepository
     {
+        Task<List<Solution>> GetSolutionsAsync();
+        Task<Solution> GetSolutionAsync(int solutionId);
+        Task AddSolutionAsync(Solution solution);
+        Task UpdateSolutionAsync(Solution solution);
+        Task DeleteSolutionAsync(int solutionId);
+        Task<bool> FindSolutionAsync(int solutionId);
+        Task<bool> SolutionExistsAsync(int solutionId);
+        Task<Solution> GetSolutionFromDatabaseAsync(int solutionId);
     }
 }
