@@ -20,7 +20,7 @@ namespace ESA_api.Models
         public int RestrictionId { get; set; }
         public int LevelId { get; set; }
 
-        public virtual AlgorithmCategory AlgorithmCategory { get; set; }
+        public virtual AlgorithmCategory AlgorithmCategory { get; set; }    
         public virtual Complexity Complexity { get; set; }
         public virtual Level Level { get; set; }
         public virtual Restriction Restriction { get; set; }

@@ -7,5 +7,7 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.LevelsDTO
 {
     public class LevelDTO
     {
+        public int Id { get; set; }
+        public string LevelName { get; set; }
     }
 }

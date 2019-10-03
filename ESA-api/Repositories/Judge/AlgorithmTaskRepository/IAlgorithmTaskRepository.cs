@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
 {
-    interface IAlgorithmTaskRepository
+    public interface IAlgorithmTaskRepository
     {
         Task<List<AlgorithmTask>> GetAlgorithmTasksAsync();
+        Task<List<AlgorithmTask>> GetAlgorithmTasksForDisplayAsync();
         Task<AlgorithmTask> GetAlgorithmTaskAsync(int algorithmTaskId);
         Task AddAlgorithmTaskAsync(AlgorithmTask algorithmTask);
         Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask);

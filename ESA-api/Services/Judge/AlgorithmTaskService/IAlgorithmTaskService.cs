@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ESA_api.Services.Judge.AlgorithmTaskService
 {
-    interface IAlgorithmTaskService
+    public interface IAlgorithmTaskService
     {
+        Task<List<AlgorithmTaskListForDisplayDTO>> GetAlgorithmTasksForDisplayAsync();
     }
 }

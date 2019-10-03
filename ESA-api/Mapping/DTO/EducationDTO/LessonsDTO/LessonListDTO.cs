@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Mapping.DTO.EducationDTO.LessonsDTO
 {
-    public class LassonListDTO
+    public class LessonListDTO
     {
         public int Id { get; set; }
         public string LessonTitle { get; set; }

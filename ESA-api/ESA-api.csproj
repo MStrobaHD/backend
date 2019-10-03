@@ -25,7 +25,6 @@
     <Folder Include="Controllers\Education\LessonController\" />
     <Folder Include="Controllers\Education\FlashcardSetController\" />
     <Folder Include="Controllers\Education\FlashcardController\" />
-    <Folder Include="Controllers\Judgement\" />
     <Folder Include="Controllers\UserAction\NormalUser\" />
     <Folder Include="Controllers\UserAction\PriviligedUser\" />
     <Folder Include="Mapping\DTO\CommonDTO\FileSharesDTO\" />

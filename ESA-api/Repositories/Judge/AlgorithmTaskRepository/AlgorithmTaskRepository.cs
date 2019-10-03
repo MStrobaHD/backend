@@ -58,6 +58,15 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
             return await _context.AlgorithmTask.ToListAsync();
         }
 
+        public async Task<List<AlgorithmTask>> GetAlgorithmTasksForDisplayAsync()
+        {
+            return await _context.AlgorithmTask
+                .Include(user => user.User)
+                .Include(complexity => complexity.Complexity)
+                .Include(algorithmCategory => algorithmCategory.AlgorithmCategory)
+                .Include(level => level.Level).ToListAsync();
+        }
+
         public async Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask)
         {
             _context.Entry(algorithmTask).State = EntityState.Modified;

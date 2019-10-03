@@ -9,9 +9,11 @@ using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
+using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
 using ESA_api.Services.Education.CourseService;
+using ESA_api.Services.Judge.AlgorithmTaskService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -92,6 +94,9 @@ namespace ESA_api
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<IAlgorithmTaskRepository, AlgorithmTaskRepository>();
+            services.AddScoped<IAlgorithmTaskService, AlgorithmTaskService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Education.LessonRepository
 {
-    interface ILessonRepository
+    public interface ILessonRepository
     {
         Task<List<Lesson>> GetLessonsAsync();
         Task<Lesson> GetLessonAsync(int lessonId);
