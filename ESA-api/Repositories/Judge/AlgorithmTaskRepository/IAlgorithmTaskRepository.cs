@@ -10,6 +10,7 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
     {
         Task<List<AlgorithmTask>> GetAlgorithmTasksAsync();
         Task<List<AlgorithmTask>> GetAlgorithmTasksForDisplayAsync();
+        Task <AlgorithmTask> GetAlgorithmTasksForSolveAsync(int algorithmTaskId);
         Task<AlgorithmTask> GetAlgorithmTaskAsync(int algorithmTaskId);
         Task AddAlgorithmTaskAsync(AlgorithmTask algorithmTask);
         Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask);

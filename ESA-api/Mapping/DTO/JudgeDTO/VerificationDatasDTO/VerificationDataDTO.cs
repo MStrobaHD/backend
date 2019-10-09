@@ -7,5 +7,8 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO
 {
     public class VerificationDataDTO
     {
+        public int Id { get; set; }
+        public string InputData { get; set; }
+        public string OutputData { get; set; }
     }
 }

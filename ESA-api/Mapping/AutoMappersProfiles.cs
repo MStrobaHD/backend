@@ -6,6 +6,7 @@ using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmCategorysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.LevelsDTO;
+using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
 using ESA_api.Models;
 using System;
@@ -28,6 +29,8 @@ namespace ESA_api.Mapping
             CreateMap<AlgorithmCategoryDTO, AlgorithmCategory>().ReverseMap();
             // Level mapping
             CreateMap<LevelDTO, Level>().ReverseMap();
+            // VerificationData mapping
+            CreateMap<VerificationDataDTO, VerificationData>().ReverseMap();
             // Course mapping
             CreateMap<CourseAddDTO, Course>();
             CreateMap<CourseListDTO, Course>().ReverseMap();

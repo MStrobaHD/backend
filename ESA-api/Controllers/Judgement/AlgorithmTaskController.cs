@@ -21,13 +21,27 @@ namespace ESA_api.Controllers.Judgement
 
         // GET: api/Course
         [HttpGet]
-        public async Task<IActionResult> GetCoursesAsync()
+        public async Task<IActionResult> GetAlgorithmTasksForDisplayAsync()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             var result = await _service.GetAlgorithmTasksForDisplayAsync();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAlgorithmTaskForSolveAsync(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetAlgorithmTaskForSolveAsync(id);
             if (result == null)
             {
                 return NotFound();

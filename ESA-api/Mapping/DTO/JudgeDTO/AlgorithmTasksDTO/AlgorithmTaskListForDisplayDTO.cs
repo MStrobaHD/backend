@@ -20,5 +20,6 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO
         public ComplexityDTO Complexity { get; set; }
         public AlgorithmCategoryDTO AlgorithmCategory { get; set; }
         public LevelDTO Level { get; set; }
+        public VerificationDataDTO VerificationData { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
     public interface IAlgorithmTaskService
     {
         Task<List<AlgorithmTaskListForDisplayDTO>> GetAlgorithmTasksForDisplayAsync();
+        Task<AlgorithmTaskListForDisplayDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId);
     }
 }

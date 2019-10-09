@@ -19,10 +19,16 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
             _mapper = mapper;
         }
 
+        public async Task<AlgorithmTaskListForDisplayDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId)
+        {
+            var task = await _repository.GetAlgorithmTasksForSolveAsync(algorithmTaskId);
+            return _mapper.Map<AlgorithmTaskListForDisplayDTO>(task);
+        }
+
         public async Task<List<AlgorithmTaskListForDisplayDTO>> GetAlgorithmTasksForDisplayAsync()
         {
-            var course = await _repository.GetAlgorithmTasksForDisplayAsync();
-            return _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(course);
+            var tasks = await _repository.GetAlgorithmTasksForDisplayAsync();
+            return _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(tasks);
         }
     }
 }
