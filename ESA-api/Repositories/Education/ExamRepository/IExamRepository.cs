@@ -12,6 +12,9 @@ namespace ESA_api.Repositories.Education.ExamRepository
         Task<Exam> GetExamAsync(int examId);
         Task<List<Exam>> GetCourseExamsAsync(int courseId);
         Task<List<Exam>> GetExamsByTypeAsync(int examTypeId);
+        Task<Exam> GetMultiSelectQuestionsOfExam(int examId);
+        Task<Exam> GetQuestionsOfExam(int examId);
+        Task<Exam> GetOrderedBlocksOfExam(int examId);
         Task AddExamAsync(Exam exam);
         Task UpdateExamAsync(Exam exam);
         Task DeleteExamAsync(int examId);

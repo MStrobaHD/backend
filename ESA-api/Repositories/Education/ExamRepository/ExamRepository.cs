@@ -68,6 +68,30 @@ namespace ESA_api.Repositories.Education.ExamRepository
             return await _context.Exam.Where(exam => exam.ExamTypeId == examTypeId).ToListAsync();
         }
 
+        public async Task<Exam> GetMultiSelectQuestionsOfExam(int examId)
+        {
+            return await _context.Exam
+               .Where(exam => exam.Id == examId)
+               .Include(exam => exam.MultiSelectQuestion)
+               .SingleOrDefaultAsync();
+        }
+
+        public async Task<Exam> GetOrderedBlocksOfExam(int examId)
+        {
+            return await _context.Exam
+               .Where(exam => exam.Id == examId)
+               .Include(exam => exam.OrderedBlock)
+               .SingleOrDefaultAsync();
+        }
+
+        public async Task<Exam> GetQuestionsOfExam(int examId)
+        {
+            return await _context.Exam
+               .Where(exam => exam.Id == examId)
+               .Include(exam => exam.Question)
+               .SingleOrDefaultAsync();
+        }
+
         public async Task UpdateExamAsync(Exam exam)
         {
             _context.Entry(exam).State = EntityState.Modified;
