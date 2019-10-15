@@ -92,6 +92,7 @@ namespace ESA_api.Controllers.Education.CourseController
         [HttpPost]
         public async Task<IActionResult> AddCourseAsync([FromBody] CourseAddDTO courseAddDTO)
         {
+            courseAddDTO.Date = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
