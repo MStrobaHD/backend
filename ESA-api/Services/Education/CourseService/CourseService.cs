@@ -22,6 +22,7 @@ namespace ESA_api.Services.Education.CourseService
 
         public async Task<int> AddCourseAsync(CourseAddDTO courseAddDTO)
         {
+            courseAddDTO.Date = DateTime.Now;
             var course = _mapper.Map<Course>(courseAddDTO);
             await _repository.AddCourseAsync(course);
             return course.Id;

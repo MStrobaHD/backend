@@ -6,41 +6,20 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Helpers
 {
-    public static class ExtensionMethods
+    public  class ExtensionMethods
 
     {
-
-        //-------------< Class: ExtensionMethods >-------------
-
-        public static string getUserId(this ClaimsPrincipal user)
-
+        public ExtensionMethods()
         {
-
-            //------------< getUserId(User) >------------
-
-            //*returns the current UserID
-
-            if (!user.Identity.IsAuthenticated)
-
-                return null;
-
-
-
-            ClaimsPrincipal currentUser = user;
-
-
-
-            //< output >
-
-            return currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            //</ output >
-
-            //------------</ getUserId(User) >------------
 
         }
 
-        //-------------</ Class: ExtensionMethods >-------------
+        public DateTime getDate()
+        {
+            return DateTime.Now;
+        }
+
+       
 
     }
 }
