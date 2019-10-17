@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Services.Education.ExamService
 {
-    interface IExamService
+   public interface IExamService
     {
         Task<List<ExamListDTO>> GetExamsAsync();
         Task<ExamDTO> GetExamAsync(int id);

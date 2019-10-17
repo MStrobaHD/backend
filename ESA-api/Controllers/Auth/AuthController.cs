@@ -35,6 +35,7 @@ namespace ESA_api.Controllers.Auth
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDTO userForRegisterDto)
         {
+            userForRegisterDto.AccountCreationDate = DateTime.Now;
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _service.UserExistsAsync(userForRegisterDto.Username))
