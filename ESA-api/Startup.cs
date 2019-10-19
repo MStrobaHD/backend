@@ -128,6 +128,7 @@ namespace ESA_api
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
