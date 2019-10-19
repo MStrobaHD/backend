@@ -35,14 +35,8 @@
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />
     <Folder Include="Services\UserAction\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\Resources\Assets\add.png" />
-    <None Include="wwwroot\Resources\Assets\course.png" />
-    <None Include="wwwroot\Resources\Assets\done_icon.png" />
-    <None Include="wwwroot\Resources\Assets\login_button_icon.jpg" />
-    <None Include="wwwroot\Resources\Assets\user-login.png" />
+    <Folder Include="Resources\Assets\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
