@@ -35,8 +35,10 @@
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />
     <Folder Include="Services\UserAction\" />
+    
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Resources\Assets\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
-
 </Project>
