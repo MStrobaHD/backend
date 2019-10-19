@@ -39,5 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="StaticFiles\Images" />
   </ItemGroup>
 </Project>
