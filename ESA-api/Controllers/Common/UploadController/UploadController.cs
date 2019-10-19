@@ -19,7 +19,7 @@ namespace ESA_api.Controllers.Common.UploadController
             try
             {
                 var file = Request.Form.Files[0];
-                var folderName = Path.Combine("Resources", "Assets");
+                var folderName = Path.Combine("StaticFiles", "Images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file.Length > 0)
