@@ -37,8 +37,5 @@
     <Folder Include="Services\UserAction\" />
     
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+
 </Project>
