@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
   </ItemGroup>
 
@@ -31,6 +31,7 @@
     <Folder Include="Mapping\DTO\EducationDTO\FlashcardSetsDTO\" />
     <Folder Include="Repositories\Common\FileShareRepository\" />
     <Folder Include="Repositories\UserRepository\AdminUser\" />
+    <Folder Include="Resources\Assets\" />
     <Folder Include="Services\Common\BadgeService\" />
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />

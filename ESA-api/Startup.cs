@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
+using ESA_api.Repositories.Education.LessonRepository;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
 using ESA_api.Services.Education.CourseService;
+using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Judge.AlgorithmTaskService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +26,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -97,6 +101,9 @@ namespace ESA_api
 
             services.AddScoped<IAlgorithmTaskRepository, AlgorithmTaskRepository>();
             services.AddScoped<IAlgorithmTaskService, AlgorithmTaskService>();
+
+            services.AddScoped<ILessonRepository, LessonRepository>();
+            services.AddScoped<ILessonService, LessonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,6 +128,12 @@ namespace ESA_api
             });
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
             app.UseMvc();
         }
     }

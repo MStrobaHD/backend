@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Education.LessonRepository;
 
 namespace ESA_api.Services.Education.LessonService
@@ -21,11 +21,25 @@ namespace ESA_api.Services.Education.LessonService
             _mapper = mapper;
         }
 
+        public async Task<int> AddCloudAssetAsync(CloudAssetAddDTO cloudAssetAddDTO)
+        {
+            var asset = _mapper.Map<CloudAsset>(cloudAssetAddDTO);
+            await _repository.AddCloudAssetAsync(asset);
+            return asset.Id;
+        }
+
         public async Task<int> AddLessonAsync(LessonAddDTO lessonAddDTO)
         {
             var lesson = _mapper.Map<Lesson>(lessonAddDTO);
             await _repository.AddLessonAsync(lesson);
             return lesson.Id;
+        }
+
+        public async Task<int> AddServerAssetAsync(ServerAssetAddDTO serverAssetAddDTO)
+        {
+            var asset = _mapper.Map<ServerAsset>(serverAssetAddDTO);
+            await _repository.AddServerAssetAsync(asset);
+            return asset.Id;
         }
 
         public async Task DeleteLessonAsync(int lessonId)

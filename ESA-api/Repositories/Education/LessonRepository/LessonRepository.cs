@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ESA_api.Models;
+using ESA_api.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Repositories.Education.LessonRepository
@@ -16,9 +16,21 @@ namespace ESA_api.Repositories.Education.LessonRepository
            _context = context;
         }
 
+        public async Task AddCloudAssetAsync(CloudAsset asset)
+        {
+            _context.CloudAsset.Add(asset);
+            await _context.SaveChangesAsync();
+        }
+
         public async  Task AddLessonAsync(Lesson lesson)
         {
             _context.Lesson.Add(lesson);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddServerAssetAsync(ServerAsset asset)
+        {
+            _context.ServerAsset.Add(asset);
             await _context.SaveChangesAsync();
         }
 

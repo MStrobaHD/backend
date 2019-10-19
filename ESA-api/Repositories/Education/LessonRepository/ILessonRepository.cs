@@ -1,4 +1,4 @@
-﻿using ESA_api.Models;
+﻿using ESA_api.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,8 @@ namespace ESA_api.Repositories.Education.LessonRepository
         Task<Lesson> GetLessonAsync(int lessonId);
         Task<List<Lesson>> GetCourseLessonsAsync(int courseId);
         Task AddLessonAsync(Lesson lesson);
+        Task AddServerAssetAsync(ServerAsset asset);
+        Task AddCloudAssetAsync(CloudAsset asset);
         Task UpdateLessonAsync(Lesson lesson);
         Task DeleteLessonAsync(int lessonId);
         Task<bool> FindLessonAsync(int lessonId);

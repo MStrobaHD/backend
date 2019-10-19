@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESA_api.Mapping.DTO.JudgeDTO.JudgmentDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

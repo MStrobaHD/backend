@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Education.CourseRepository;
 
 namespace ESA_api.Services.Education.CourseService

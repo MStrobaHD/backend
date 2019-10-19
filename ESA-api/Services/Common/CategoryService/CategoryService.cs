@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Common.CategoryRepository;
 
 namespace ESA_api.Services.Common.CategoryService

@@ -2,13 +2,14 @@
 using ESA_api.Mapping.DTO;
 using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
+using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmCategorysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.LevelsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace ESA_api.Mapping
             CreateMap<CategoryDTO, Category>().ReverseMap();
             // AlgorithmTask mapping
             CreateMap<AlgorithmTaskListForDisplayDTO, AlgorithmTask>().ReverseMap();
+            // Lesson mappin
+            CreateMap<LessonAddDTO, Lesson>();
+            CreateMap<ServerAssetAddDTO, ServerAsset>();
+            CreateMap<CloudAssetAddDTO, CloudAsset>();
+
         }
     }
 }
