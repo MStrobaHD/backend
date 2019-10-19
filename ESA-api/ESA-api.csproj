@@ -29,14 +29,16 @@
     <Folder Include="Mapping\DTO\CommonDTO\StatisticsDTO\" />
     <Folder Include="Mapping\DTO\EducationDTO\FlashcardsDTO\" />
     <Folder Include="Mapping\DTO\EducationDTO\FlashcardSetsDTO\" />
-    <Folder Include="wwwroot\" />
     <Folder Include="Repositories\Common\FileShareRepository\" />
     <Folder Include="Repositories\UserRepository\AdminUser\" />
-    <Folder Include="Resources\Assets\" />
+
     <Folder Include="Services\Common\BadgeService\" />
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />
     <Folder Include="Services\UserAction\" />
-    
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Resources\Assets\" />
   </ItemGroup>
 </Project>
