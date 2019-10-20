@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ESA_api.Model
+namespace ESA_api.Models
 {
-    public partial class VerificationData
+    public partial class AlgorithmCategory
     {
-        public VerificationData()
+        public AlgorithmCategory()
         {
             AlgorithmTask = new HashSet<AlgorithmTask>();
         }
 
         public int Id { get; set; }
-        public string InputData { get; set; }
-        public string OutputData { get; set; }
+        public string AlgorithmCategoryName { get; set; }
 
         public virtual ICollection<AlgorithmTask> AlgorithmTask { get; set; }
     }

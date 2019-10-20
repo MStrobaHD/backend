@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ESA_api.Model
+namespace ESA_api.Models
 {
-    public partial class Complexity
+    public partial class VerificationData
     {
-        public Complexity()
+        public VerificationData()
         {
             AlgorithmTask = new HashSet<AlgorithmTask>();
         }
 
         public int Id { get; set; }
-        public string ComplexityName { get; set; }
-        public int ComplexityRange { get; set; }
+        public string InputData { get; set; }
+        public string OutputData { get; set; }
 
         public virtual ICollection<AlgorithmTask> AlgorithmTask { get; set; }
     }

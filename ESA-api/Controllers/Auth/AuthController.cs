@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO;
 using ESA_api.Mapping.DTO.Auth;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

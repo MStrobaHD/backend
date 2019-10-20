@@ -1,5 +1,5 @@
 ﻿using ESA_api.Mapping.Custom;
-using ESA_api.Model;
+using ESA_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

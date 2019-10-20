@@ -1,4 +1,4 @@
-﻿using ESA_api.Model;
+﻿using ESA_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace ESA_api.Repositories.Education.ExamRepository
         Task<List<Exam>> GetExamsAsync();
         Task<Exam> GetExamAsync(int examId);
         Task<List<Exam>> GetCourseExamsAsync(int courseId);
-        Task<List<Exam>> GetExamsByTypeAsync(int examTypeId);
+        // Task<List<Exam>> GetExamsByTypeAsync(int examTypeId);
         Task<Exam> GetMultiSelectQuestionsOfExam(int examId);
         Task<Exam> GetQuestionsOfExam(int examId);
         Task<Exam> GetOrderedBlocksOfExam(int examId);

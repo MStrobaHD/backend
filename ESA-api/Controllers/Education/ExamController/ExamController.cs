@@ -67,28 +67,28 @@ namespace ESA_api.Controllers.Education.ExamController
             return Ok(result);
         }
 
-        // GET: api/Course/Category/Id
-        [HttpGet("ExamType/{examTypeId}")]
-        public async Task<IActionResult> GetExamsByTypeAsync(int examTypeId)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// GET: api/Course/Category/Id
+        //[HttpGet("ExamType/{examTypeId}")]
+        //public async Task<IActionResult> GetExamsByTypeAsync(int examTypeId)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var result = await _service.GetExamsByTypeAsync(examTypeId);
+        //    var result = await _service.GetExamsByTypeAsync(examTypeId);
 
-            if (result == null)
-            {
-                return NotFound();
-            }
+        //    if (result == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
         // POST: api/Course
         [HttpPost]
-        public async Task<IActionResult> AddCourseAsync([FromBody] ExamAddDTO examAddDTO)
+        public async Task<IActionResult> AddExamAsync([FromBody] ExamAddDTO examAddDTO)
         {
             if (!ModelState.IsValid)
             {

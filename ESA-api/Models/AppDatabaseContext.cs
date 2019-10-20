@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ESA_api.Model
+namespace ESA_api.Models
 {
     public partial class AppDatabaseContext : DbContext
     {
@@ -26,7 +26,6 @@ namespace ESA_api.Model
         public virtual DbSet<CourseEnrolment> CourseEnrolment { get; set; }
         public virtual DbSet<Exam> Exam { get; set; }
         public virtual DbSet<ExamResult> ExamResult { get; set; }
-        public virtual DbSet<ExamType> ExamType { get; set; }
         public virtual DbSet<Experience> Experience { get; set; }
         public virtual DbSet<Flashcard> Flashcard { get; set; }
         public virtual DbSet<FlashcardSet> FlashcardSet { get; set; }
@@ -45,7 +44,7 @@ namespace ESA_api.Model
         public virtual DbSet<Verdict> Verdict { get; set; }
         public virtual DbSet<VerificationData> VerificationData { get; set; }
 
-
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
@@ -204,8 +203,7 @@ namespace ESA_api.Model
             {
                 entity.Property(e => e.CourseIconUrl)
                     .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                    .HasColumnType("text");
 
                 entity.Property(e => e.CourseName)
                     .IsRequired()
@@ -256,16 +254,14 @@ namespace ESA_api.Model
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ExamType)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Exam)
                     .HasForeignKey(d => d.CourseId)
                     .HasConstraintName("FK_EXAM_REFERENCE_COURSE");
-
-                entity.HasOne(d => d.ExamType)
-                    .WithMany(p => p.Exam)
-                    .HasForeignKey(d => d.ExamTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EXAM_REFERENCE_EXAMTYPE");
             });
 
             modelBuilder.Entity<ExamResult>(entity =>
@@ -286,14 +282,6 @@ namespace ESA_api.Model
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_EXAMRESU_REFERENCE_USER");
-            });
-
-            modelBuilder.Entity<ExamType>(entity =>
-            {
-                entity.Property(e => e.ExamTypeName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Experience>(entity =>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Education.ExamRepository;
 
 namespace ESA_api.Services.Education.ExamService
@@ -57,11 +57,11 @@ namespace ESA_api.Services.Education.ExamService
             return _mapper.Map<List<ExamListDTO>>(exams);
         }
 
-        public async Task<List<ExamListDTO>> GetExamsByTypeAsync(int examTypeId)
-        {
-            var exams = await _repository.GetExamsByTypeAsync(examTypeId);
-            return _mapper.Map<List<ExamListDTO>>(exams);
-        }
+        //public async Task<List<ExamListDTO>> GetExamsByTypeAsync(int examTypeId)
+        //{
+        //    var exams = await _repository.GetExamsByTypeAsync(examTypeId);
+        //    return _mapper.Map<List<ExamListDTO>>(exams);
+        //}
 
         public async Task<int> UpdateExamAsync(int examId, ExamAddDTO examAddDTO)
         {

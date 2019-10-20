@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ESA_api.Model
+namespace ESA_api.Models
 {
     public partial class Experience
     {

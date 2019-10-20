@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Education.CourseRepository;
@@ -136,12 +136,12 @@ namespace ESA_api
             //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
             //    RequestPath = new PathString("/Resources")
             //});
-            //app.UseStaticFiles();
-            //app.UseStaticFiles(new StaticFileOptions()
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
-            //    RequestPath = new PathString("/StaticFiles")
-            //});
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+                RequestPath = new PathString("/StaticFiles")
+            });
             app.UseMvc();
         }
     }

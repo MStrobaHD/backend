@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ESA_api.Model;
+using ESA_api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Repositories.Education.ExamRepository
@@ -63,10 +63,10 @@ namespace ESA_api.Repositories.Education.ExamRepository
             return await _context.Exam.ToListAsync();
         }
 
-        public async Task<List<Exam>> GetExamsByTypeAsync(int examTypeId)
-        {
-            return await _context.Exam.Where(exam => exam.ExamTypeId == examTypeId).ToListAsync();
-        }
+        //public async Task<List<Exam>> GetExamsByTypeAsync(int examTypeId)
+        //{
+        //    return await _context.Exam.Where(exam => exam.ExamTypeId == examTypeId).ToListAsync();
+        //}
 
         public async Task<Exam> GetMultiSelectQuestionsOfExam(int examId)
         {

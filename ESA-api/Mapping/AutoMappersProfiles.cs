@@ -9,7 +9,7 @@ using ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.LevelsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
