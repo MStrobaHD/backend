@@ -2,7 +2,11 @@
 using ESA_api.Mapping.DTO;
 using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
+using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
+using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO;
+using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.MultiSelectQuestionDTO;
+using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.OrderedBlockDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmCategorysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO;
@@ -38,11 +42,18 @@ namespace ESA_api.Mapping
             CreateMap<CategoryDTO, Category>().ReverseMap();
             // AlgorithmTask mapping
             CreateMap<AlgorithmTaskListForDisplayDTO, AlgorithmTask>().ReverseMap();
-            // Lesson mappin
+            // Lesson mapping
             CreateMap<LessonAddDTO, Lesson>();
             CreateMap<ServerAssetAddDTO, ServerAsset>();
             CreateMap<CloudAssetAddDTO, CloudAsset>();
-
+            // Exam mapping
+            CreateMap<ExamAddDTO, Exam>();
+            // Question mapping
+            CreateMap<QuestionAddDTO, Question>();
+            // MultiSelectQuestion mapping
+            CreateMap<MultiSelectQuestionAddDTO, MultiSelectQuestion>();
+            // OrderedBlock mapping
+            CreateMap<OrderedBlockAddDTO, OrderedBlock>();
         }
     }
 }

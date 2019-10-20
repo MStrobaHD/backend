@@ -91,6 +91,13 @@ namespace ESA_api.Repositories.Education.QuestionRepository
             return await _context.MultiSelectQuestion.ToListAsync();
         }
 
+        public async Task<List<MultiSelectQuestion>> GetMultiSelectQuestionsFromExamAsync(int examId)
+        {
+            return await _context.MultiSelectQuestion
+                .Where(question => question.ExamId==examId)
+                .ToListAsync();
+        }
+
         public async Task<OrderedBlock> GetOrderedBlockAsync(int orderedBlockId)
         {
             return await _context.OrderedBlock.Where(orderedBlock => orderedBlock.Id == orderedBlockId).SingleOrDefaultAsync();
@@ -106,6 +113,13 @@ namespace ESA_api.Repositories.Education.QuestionRepository
             return await _context.OrderedBlock.ToListAsync();
         }
 
+        public async Task<List<OrderedBlock>> GetOrderedBlocksFromExamAsync(int examId)
+        {
+            return await _context.OrderedBlock
+                .Where(question => question.ExamId == examId)
+                .ToListAsync();
+        }
+
         public async Task<Question> GetQuestionAsync(int questionId)
         {
             return await _context.Question.Where(question => question.Id == questionId).SingleOrDefaultAsync();
@@ -119,6 +133,13 @@ namespace ESA_api.Repositories.Education.QuestionRepository
         public async Task<List<Question>> GetQuestionsAsync()
         {
             return await _context.Question.ToListAsync();
+        }
+
+        public async Task<List<Question>> GetQuestionsFromExamAsync(int examId)
+        {
+            return await _context.Question
+               .Where(question => question.ExamId == examId)
+               .ToListAsync();
         }
 
         public async Task<bool> MultiSelectQuestionExistsAsync(int multiSelectQuestionId)

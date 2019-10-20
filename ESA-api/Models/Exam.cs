@@ -18,7 +18,7 @@ namespace ESA_api.Models
         public int NumberOfQuestion { get; set; }
         public int TimeForSolve { get; set; }
         public int? CourseId { get; set; }
-        public string ExamType { get; set; }
+        public int ExamType { get; set; }
 
         public virtual Course Course { get; set; }
         public virtual ICollection<ExamResult> ExamResult { get; set; }

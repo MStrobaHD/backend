@@ -11,6 +11,7 @@ namespace ESA_api.Repositories.Education.QuestionRepository
         // Single question
         Task<List<Question>> GetQuestionsAsync();
         Task<Question> GetQuestionAsync(int questionId);
+        Task<List<Question>> GetQuestionsFromExamAsync(int examId); 
         Task AddQuestionAsync(Question question);
         Task UpdateQuestionAsync(Question question);
         Task DeleteQuestionAsync(int questionId);
@@ -21,6 +22,7 @@ namespace ESA_api.Repositories.Education.QuestionRepository
         // Multi select question
         Task<List<MultiSelectQuestion>> GetMultiSelectQuestionsAsync();
         Task<MultiSelectQuestion> GetMultiSelectQuestionAsync(int multiSelectQuestionId);
+        Task<List<MultiSelectQuestion>> GetMultiSelectQuestionsFromExamAsync(int examId);
         Task AddMultiSelectQuestionAsync(MultiSelectQuestion multiSelectQuestion);
         Task UpdateMultiSelectQuestionAsync(MultiSelectQuestion multiSelectQuestion);
         Task DeleteMultiSelectQuestionAsync(int multiSelectQuestionId);
@@ -31,6 +33,7 @@ namespace ESA_api.Repositories.Education.QuestionRepository
         // Ordered block
         Task<List<OrderedBlock>> GetOrderedBlocksAsync();
         Task<OrderedBlock> GetOrderedBlockAsync(int OrderedBlockId);
+        Task<List<OrderedBlock>> GetOrderedBlocksFromExamAsync(int examId);
         Task AddOrderedBlockAsync(OrderedBlock OrderedBlock);
         Task UpdateOrderedBlockAsync(OrderedBlock OrderedBlock);
         Task DeleteOrderedBlockAsync(int OrderedBlockId);

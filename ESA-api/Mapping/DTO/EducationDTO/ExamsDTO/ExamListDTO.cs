@@ -11,6 +11,6 @@ namespace ESA_api.Mapping.DTO.EducationDTO.ExamsDTO
         public string ExamName { get; set; }
         public int NumberOfQuestion { get; set; }
         public int TimeForSolve { get; set; }
-        public string ExamType { get; set; }
+        public int ExamType { get; set; }
     }
 }

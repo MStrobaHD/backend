@@ -11,11 +11,14 @@ using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
 using ESA_api.Repositories.Education.LessonRepository;
+using ESA_api.Repositories.Education.QuestionRepository;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
 using ESA_api.Services.Education.CourseService;
+using ESA_api.Services.Education.ExamService;
 using ESA_api.Services.Education.LessonService;
+using ESA_api.Services.Education.QuestionService;
 using ESA_api.Services.Judge.AlgorithmTaskService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -95,7 +98,7 @@ namespace ESA_api
             services.AddScoped<ICourseService, CourseService>();
 
             services.AddScoped<IExamRepository, ExamRepository>();
-            //services.AddScoped<IExamService, ExamService>();
+            services.AddScoped<IExamService, ExamService>();
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
@@ -105,6 +108,9 @@ namespace ESA_api
 
             services.AddScoped<ILessonRepository, LessonRepository>();
             services.AddScoped<ILessonService, LessonService>();
+
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IQuestionService, QuestionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
