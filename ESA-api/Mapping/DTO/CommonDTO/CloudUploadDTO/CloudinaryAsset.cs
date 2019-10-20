@@ -17,9 +17,5 @@ namespace ESA_api.Mapping.DTO.CommonDTO.CloudUploadDTO
         public int UserId { get; set; }
         public int? LessonId { get; set; }
 
-        public CloudinaryAsset()
-        {
-            DateCreated = DateTime.Now;
-        }
     }
 }
