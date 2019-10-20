@@ -13,6 +13,9 @@ namespace ESA_api.Services.Education.QuestionService
         Task<int> AddQuestionAsync(QuestionAddDTO questionAddDTO);
         Task<int> AddMultiSelectQuestionAsync(MultiSelectQuestionAddDTO multiSelectQuestionAddDTO);
         Task<int> AddOrderedBlockAsync(OrderedBlockAddDTO orderedBlockAddDTO );
+        Task<List<QuestionListDTO>> GetQuestionsFromExamAsync(int examId);
+        Task<List<MultiSelectQuestionListDTO>> GetMultiSelectQuestionsFromExamAsync(int examId);
+        Task<List<OrderedBlockListDTO>> GetOrderedBlocksFromExamAsync(int examId);
 
         //Task<ExamDTO> GetExamAsync(int id);
         //Task<List<ExamListDTO>> GetCourseExamsAsync(int courseId);

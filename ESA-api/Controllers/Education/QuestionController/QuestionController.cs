@@ -32,7 +32,7 @@ namespace ESA_api.Controllers.Education.QuestionController
             var result = await _service.AddQuestionAsync(questionAddDTO);
             return Ok(result);
         }
-        [HttpPost("api/multiSelectQuestion")]
+        [HttpPost("multiSelectQuestion")]
         public async Task<IActionResult> AddMultiSelectQuestionAsync([FromBody] MultiSelectQuestionAddDTO multiSelectQuestionAddDTO)
         {
             if (!ModelState.IsValid)
@@ -42,7 +42,7 @@ namespace ESA_api.Controllers.Education.QuestionController
             var result = await _service.AddMultiSelectQuestionAsync(multiSelectQuestionAddDTO);
             return Ok(result);
         }
-        [HttpPost("api/orderedBlock")]
+        [HttpPost("orderedBlock")]
         public async Task<IActionResult> AddOrderedBlockAsync([FromBody] OrderedBlockAddDTO orderedBlockAddDTO)
         {
             if (!ModelState.IsValid)
@@ -50,6 +50,48 @@ namespace ESA_api.Controllers.Education.QuestionController
                 return BadRequest(ModelState);
             }
             var result = await _service.AddOrderedBlockAsync(orderedBlockAddDTO);
+            return Ok(result);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetQuestionsFromExamAsync(int examId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetQuestionsFromExamAsync(examId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("multiSelectQuestion")]
+        public async Task<IActionResult> GetMultiSelectQuestionsFromExamAsync(int examId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetMultiSelectQuestionsFromExamAsync(examId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("orderedBlock")]
+        public async Task<IActionResult> GetOrderedBlocksFromExamAsync(int examId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetOrderedBlocksFromExamAsync(examId);
+            if (result == null)
+            {
+                return NotFound();
+            }
             return Ok(result);
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using ESA_api.Helpers;
 using ESA_api.Models;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
@@ -91,6 +92,9 @@ namespace ESA_api
                     ValidateAudience = false
                 };
             });
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
 
