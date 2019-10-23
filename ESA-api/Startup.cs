@@ -9,18 +9,26 @@ using ESA_api.Helpers;
 using ESA_api.Models;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
+using ESA_api.Repositories.Common.CloudUploadRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
 using ESA_api.Repositories.Education.LessonRepository;
 using ESA_api.Repositories.Education.QuestionRepository;
+using ESA_api.Repositories.Judge.AlgorithmCategoryRepository;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
+using ESA_api.Repositories.Judge.ComplexityRepository;
+using ESA_api.Repositories.Judge.LevelRepository;
 using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
+using ESA_api.Services.Common.CloudUploadService;
 using ESA_api.Services.Education.CourseService;
 using ESA_api.Services.Education.ExamService;
 using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Education.QuestionService;
+using ESA_api.Services.Judge.AlgorithmCategoryService;
 using ESA_api.Services.Judge.AlgorithmTaskService;
+using ESA_api.Services.Judge.ComplexityService;
+using ESA_api.Services.Judge.LevelService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -115,6 +123,19 @@ namespace ESA_api
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
+
+            services.AddScoped<ICloudUploadRepository, CloudRepository>();
+            services.AddScoped<ICloudUploadService, CloudUploadService>();
+
+            // Judge Controllers
+            services.AddScoped<ILevelRepository, LevelRepository>();
+            services.AddScoped<ILevelService, LevelService>();
+
+            services.AddScoped<IAlgorithmCategoryRepository, AlgorithmCategoryRepository>();
+            services.AddScoped<IAlgorithmCategoryService, AlgorithmCategoryService>();
+
+            services.AddScoped<IComplexityRepository, ComplexityRepository>();
+            services.AddScoped<IComplexityService, ComplexityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

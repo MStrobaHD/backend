@@ -7,5 +7,7 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.AlgorithmCategorysDTO
 {
     public class AlgorithmCategoryListDTO
     {
+        public int Id { get; set; }
+        public string AlgorithmCategoryName { get; set; }
     }
 }

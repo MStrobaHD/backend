@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.ComplexityRepository
 {
-    interface IComplexityRepository
+    public interface IComplexityRepository
     {
         Task<List<Complexity>> GetComplexitysAsync();
         Task<Complexity> GetComplexityAsync(int complexityId);

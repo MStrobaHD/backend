@@ -24,6 +24,11 @@
     <Folder Include="Controllers\Common\Enrolments\" />
     <Folder Include="Controllers\Education\FlashcardSetController\" />
     <Folder Include="Controllers\Education\FlashcardController\" />
+    <Folder Include="Controllers\Judgement\AlgorithmTaskController\" />
+    <Folder Include="Controllers\Judgement\SolutionController\" />
+    <Folder Include="Controllers\Judgement\RestrictionController\" />
+    <Folder Include="Controllers\Judgement\VerificationDataController\" />
+    <Folder Include="Controllers\Judgement\VerdictController\" />
     <Folder Include="Controllers\UserAction\NormalUser\" />
     <Folder Include="Controllers\UserAction\PriviligedUser\" />
     <Folder Include="Mapping\DTO\CommonDTO\FileSharesDTO\" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.AlgorithmCategoryRepository
 {
-    interface IAlgorithmCategoryRepository
+    public interface IAlgorithmCategoryRepository
     {
         Task<List<AlgorithmCategory>> GetAlgorithmCategoriesAsync();
         Task<AlgorithmCategory> GetAlgorithmCategoryAsync(int algorithmCategoryId);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.LevelRepository
 {
-    interface ILevelRepository
+    public interface ILevelRepository
     {
         Task<List<Level>> GetLevelsAsync();
         Task<Level> GetLevelAsync(int levelId);

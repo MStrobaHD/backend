@@ -7,5 +7,7 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO
 {
     public class ComplexityAddDTO
     {
+        public string ComplexityName { get; set; }
+        public int ComplexityRange { get; set; }
     }
 }

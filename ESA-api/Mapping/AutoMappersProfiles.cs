@@ -30,10 +30,14 @@ namespace ESA_api.Mapping
             CreateMap<UserDTO, User>().ReverseMap();
             // Complexity mapping
             CreateMap<ComplexityDTO, Complexity>().ReverseMap();
+            CreateMap<ComplexityListDTO, Complexity>().ReverseMap();
             // AlgorithmCategory mapping
             CreateMap<AlgorithmCategoryDTO, AlgorithmCategory>().ReverseMap();
+            CreateMap<AlgorithmCategoryListDTO, AlgorithmCategory>().ReverseMap();
             // Level mapping
             CreateMap<LevelDTO, Level>().ReverseMap();
+            CreateMap<LevelAddDTO, Level>().ReverseMap();
+            CreateMap<LevelListDTO, Level>().ReverseMap();
             // VerificationData mapping
             CreateMap<VerificationDataDTO, VerificationData>().ReverseMap();
             // Course mapping
