@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.VerificationDataRepository
 {
-    interface IVerificationDataRepository
+    public interface IVerificationDataRepository
     {
         Task<List<VerificationData>> GetVerificationDatasAsync();
         Task<VerificationData> GetVerificationDataAsync(int verificationDataId);

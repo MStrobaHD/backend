@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.RestrictionRepository
 {
-    interface IRestrictionRepository
+    public interface IRestrictionRepository
     {
         Task<List<Restriction>> GetRestrictionsAsync();
         Task<Restriction> GetRestrictionAsync(int restrictionId);

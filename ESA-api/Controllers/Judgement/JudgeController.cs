@@ -29,9 +29,15 @@ namespace ESA_api.Controllers.Judgement
                 return BadRequest(ModelState);
             }
 
+            // source code to file
+            // source code calculate coplexity
+            // 
+
+
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+           // startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 
             // run cmd in hidden mode
             startInfo.FileName = "cmd.exe";
