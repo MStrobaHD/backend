@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -29,6 +30,7 @@ using ESA_api.Services.Education.QuestionService;
 using ESA_api.Services.Judge.AlgorithmCategoryService;
 using ESA_api.Services.Judge.AlgorithmTaskService;
 using ESA_api.Services.Judge.ComplexityService;
+using ESA_api.Services.Judge.ExternalService;
 using ESA_api.Services.Judge.LevelService;
 using ESA_api.Services.Judge.VerificationDataService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -141,6 +143,9 @@ namespace ESA_api
 
             services.AddScoped<IVerificationDataRepository, VerificationRepository>();
             services.AddScoped<IVerificationDataService, VerificationDataService>();
+            
+
+            services.AddScoped<IExternalService, ExternalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

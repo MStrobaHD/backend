@@ -22,6 +22,7 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
         public async Task<AlgorithmTaskListForDisplayDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId)
         {
             var task = await _repository.GetAlgorithmTasksForSolveAsync(algorithmTaskId);
+            
             return _mapper.Map<AlgorithmTaskListForDisplayDTO>(task);
         }
 
