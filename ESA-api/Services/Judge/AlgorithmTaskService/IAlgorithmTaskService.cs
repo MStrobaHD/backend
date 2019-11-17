@@ -1,4 +1,5 @@
-﻿using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
+﻿using ESA_api.Mapping.Custom;
+using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

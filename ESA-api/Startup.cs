@@ -13,6 +13,7 @@ using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Common.CloudUploadRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
+using ESA_api.Repositories.Education.ExamResultRepository;
 using ESA_api.Repositories.Education.LessonRepository;
 using ESA_api.Repositories.Education.QuestionRepository;
 using ESA_api.Repositories.Judge.AlgorithmCategoryRepository;
@@ -24,6 +25,7 @@ using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
 using ESA_api.Services.Common.CloudUploadService;
 using ESA_api.Services.Education.CourseService;
+using ESA_api.Services.Education.ExamResultService;
 using ESA_api.Services.Education.ExamService;
 using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Education.QuestionService;
@@ -127,6 +129,9 @@ namespace ESA_api
 
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
+
+            services.AddScoped<IExamResultRepository, ExamResultRepository>();
+            services.AddScoped<IExamResultService, ExamResultService>();
 
             services.AddScoped<ICloudUploadRepository, CloudRepository>();
             services.AddScoped<ICloudUploadService, CloudUploadService>();

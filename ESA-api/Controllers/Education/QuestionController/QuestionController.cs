@@ -19,11 +19,11 @@ namespace ESA_api.Controllers.Education.QuestionController
 
         public QuestionController(IQuestionService service)
         {
-           _service = service;
+            _service = service;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddQuestionAsync([FromBody] QuestionAddDTO questionAddDTO )
+        public async Task<IActionResult> AddQuestionAsync([FromBody] QuestionAddDTO questionAddDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -52,7 +52,7 @@ namespace ESA_api.Controllers.Education.QuestionController
             var result = await _service.AddOrderedBlockAsync(orderedBlockAddDTO);
             return Ok(result);
         }
-        [HttpGet]
+        [HttpGet("{examId}")]
         public async Task<IActionResult> GetQuestionsFromExamAsync(int examId)
         {
             if (!ModelState.IsValid)
@@ -66,7 +66,7 @@ namespace ESA_api.Controllers.Education.QuestionController
             }
             return Ok(result);
         }
-        [HttpGet("multiSelectQuestion")]
+        [HttpGet("multiSelectQuestion/{examId}")]
         public async Task<IActionResult> GetMultiSelectQuestionsFromExamAsync(int examId)
         {
             if (!ModelState.IsValid)

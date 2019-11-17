@@ -2,6 +2,7 @@
 using ESA_api.Mapping.DTO;
 using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
+using ESA_api.Mapping.DTO.EducationDTO.ExamResultDTO;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO;
@@ -47,6 +48,15 @@ namespace ESA_api.Mapping
             // Course mapping
             CreateMap<CourseAddDTO, Course>();
             CreateMap<CourseListDTO, Course>().ReverseMap();
+            // Course mapping
+            CreateMap<QuestionListDTO, Question>().ReverseMap();
+            CreateMap<MultiSelectQuestionListDTO, MultiSelectQuestion>().ReverseMap();
+
+            // Exam mapping
+            CreateMap<ExamAddDTO, Exam>();
+            CreateMap<ExamListDTO, Exam>().ReverseMap();
+            CreateMap<ExamResultAddDTO, ExamResult>().ReverseMap();
+
             CreateMap<CategoryDTO, Category>().ReverseMap();
             // AlgorithmTask mapping
             CreateMap<AlgorithmTaskListForDisplayDTO, AlgorithmTask>().ReverseMap();
