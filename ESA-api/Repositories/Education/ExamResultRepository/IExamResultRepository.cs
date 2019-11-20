@@ -9,6 +9,6 @@ namespace ESA_api.Repositories.Education.ExamResultRepository
     public interface IExamResultRepository
     {
         Task AddResultAsync(ExamResult  examResult);
-        Task<List<ExamResult>> GetExamResultsAsync();
+        Task<List<ExamResult>> GetExamResultsAsync(int userId);
     }
 }

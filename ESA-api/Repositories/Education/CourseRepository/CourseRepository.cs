@@ -1,4 +1,6 @@
-﻿using ESA_api.Models;
+﻿using ESA_api.Mapping.DTO.CommonDTO.CategorysDTO;
+using ESA_api.Models;
+using ESA_api.Repositories.Common.CategoryRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,12 @@ namespace ESA_api.Repositories.Education.CourseRepository
     public class CourseRepository : ICourseRepository
     {
         private readonly AppDatabaseContext _context;
+        private readonly ICategoryRepository _repository;
 
-        public CourseRepository(AppDatabaseContext context)
+        public CourseRepository(AppDatabaseContext context, ICategoryRepository repository)
         {
             _context = context;
+           _repository = repository;
         }
 
         public async Task AddCourseAsync(Course course)
@@ -34,11 +38,29 @@ namespace ESA_api.Repositories.Education.CourseRepository
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteEnrolmentAsync(int userId, int courseId)
+        {
+            var enrolment = await _context.CourseEnrolment.Where(course => course.UserId == userId & course.CourseId == courseId).SingleOrDefaultAsync();
+            _context.CourseEnrolment.Remove(enrolment);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EnrolCourse(CourseEnrolment courseEnrolment)
+        {
+            _context.CourseEnrolment.Add(courseEnrolment);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<bool> FindCourseAsync(int courseId)
         {
             if (await _context.Course.FindAsync(courseId) != null)
                 return true;
             return false;
+        }
+
+        public async Task<bool> FindEnrolmentAsync(int userId, int courseId)
+        {
+            return await _context.CourseEnrolment.AnyAsync(enrolment => enrolment.UserId == userId & enrolment.CourseId == courseId);
         }
 
         public async Task<Course> GetCourseAsync(int courseId)
@@ -70,7 +92,50 @@ namespace ESA_api.Repositories.Education.CourseRepository
         {
             return await _context.User
                 .Include(course => course.CourseEnrolment)
-                .Include(courseEnrolment => courseEnrolment.Course).SingleOrDefaultAsync();
+                .ThenInclude(courseEnrolment => courseEnrolment.Course).Where(course => course.Id == userId).SingleOrDefaultAsync();
+        }
+
+        public async Task<List<Course>> GetRecommendedCoursesAsync(int userId)
+        {
+            var coursesEnlistedByUser = await GetEnrolmentCoursesAsync(userId);
+            var categories = await _repository.GetCategoriesAsync();
+            int categoryCounter = 0;
+
+            List<Course> enlistedCourses = new List<Course>();
+            List<CategoryIdDTO> category = new List<CategoryIdDTO>();
+
+            foreach (var enrolment in coursesEnlistedByUser.CourseEnrolment)
+            {
+                enlistedCourses.Add(enrolment.Course);
+            }
+
+            foreach(var categoryItem in categories)
+            {
+                foreach(var categorizedCourse in enlistedCourses)
+                {
+                    if(categorizedCourse.CategoryId == categoryItem.Id)
+                    {
+                        categoryCounter++;
+                    }
+                }
+                CategoryIdDTO item = new CategoryIdDTO();
+                item.Id = categoryItem.Id;
+                item.Count = categoryCounter;
+                category.Add(item);
+            }
+            // poprawic to gówno
+            // jesli nie pierwsza kategoria to nastepna i tak ojebania wszyzstkich kategorii
+            // dodać współczynnik zainteresowania -> najczesciej wybierane kursy
+            // + w danym przedziale wiekowym
+            // 
+            category.Sort();
+            var choosen = category.First();
+
+            // pobrac kursy na które nie jest zapisany uzytkownik
+            // a z nich te które wskaże wspołczynnik zaiteresowania
+
+          
+            return enlistedCourses;
         }
 
         public async Task UpdateCourseAsync(Course course)

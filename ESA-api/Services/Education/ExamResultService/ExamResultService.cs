@@ -27,5 +27,10 @@ namespace ESA_api.Services.Education.ExamResultService
             return examResult.Id;
         }
 
+        public async Task<List<ExamResultAddDTO>> GetExamResultsAsync(int userId)
+        {
+            var results = await _repository.GetExamResultsAsync(userId);
+            return _mapper.Map<List<ExamResultAddDTO>>(results);
+        }
     }
 }

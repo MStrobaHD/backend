@@ -87,6 +87,40 @@ namespace ESA_api.Controllers.Education.CourseController
 
             return Ok(result);
         }
+        [HttpGet("Enroled/{userId}")]
+        public async Task<IActionResult> GetEnroledCoursesAsync(int userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _service.GetEnroledCoursesAsync(userId);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+        [HttpGet("NoEnroled/{userId}")]
+        public async Task<IActionResult> GetNoEnroledCoursesAsync(int userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _service.GetNoEnroledCoursesAsync(userId);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
 
         // POST: api/Course
         [HttpPost]
@@ -99,6 +133,25 @@ namespace ESA_api.Controllers.Education.CourseController
             }
             var result = await _service.AddCourseAsync(courseAddDTO);
             return Ok(result);
+        }
+        [HttpPost("enrolment/")]
+        public async Task<IActionResult> EnrolCourseAsync([FromBody] EnlistParametersDTO enlistParametersDTO )
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(await _service.EnrolmentExistAsync(enlistParametersDTO))
+            {
+                return BadRequest("Jesteś już zapisany na kurs");
+            } else
+            {
+                var result = await _service.EnrolCourse(enlistParametersDTO);
+                return Ok(result);
+            }
+
+            
         }
 
         // PUT: api/Course/5
@@ -150,6 +203,24 @@ namespace ESA_api.Controllers.Education.CourseController
             }
 
             await _service.DeleteCourseAsync(courseId);
+
+            return NoContent();
+        }
+        [HttpDelete("enrolment")]
+        public async Task<IActionResult> DeleteEnrolmentAsync( int userId, int courseId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var course = await _service.FindCourseAsync(courseId);
+            if (course == false)
+            {
+                return NotFound();
+            }
+
+            await _service.DeleteEnrolmentAsync(userId, courseId);
 
             return NoContent();
         }

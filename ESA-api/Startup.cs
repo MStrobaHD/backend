@@ -21,6 +21,7 @@ using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Repositories.Judge.ComplexityRepository;
 using ESA_api.Repositories.Judge.LevelRepository;
 using ESA_api.Repositories.Judge.VerificationDataRepository;
+using ESA_api.Repositories.UserRepository.NormalUser;
 using ESA_api.Services.Auth;
 using ESA_api.Services.Common.CategoryService;
 using ESA_api.Services.Common.CloudUploadService;
@@ -35,6 +36,7 @@ using ESA_api.Services.Judge.ComplexityService;
 using ESA_api.Services.Judge.ExternalService;
 using ESA_api.Services.Judge.LevelService;
 using ESA_api.Services.Judge.VerificationDataService;
+using ESA_api.Services.UserAction;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -149,8 +151,11 @@ namespace ESA_api
             services.AddScoped<IVerificationDataRepository, VerificationRepository>();
             services.AddScoped<IVerificationDataService, VerificationDataService>();
             
-
             services.AddScoped<IExternalService, ExternalService>();
+
+            // User Controller
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

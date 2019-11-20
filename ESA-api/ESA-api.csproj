@@ -41,7 +41,6 @@
     <Folder Include="Services\Common\BadgeService\" />
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />
-    <Folder Include="Services\UserAction\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />

@@ -13,7 +13,11 @@ namespace ESA_api.Repositories.Education.CourseRepository
         Task<User> GetEnrolmentCoursesAsync(int userId);
         Task<List<Course>> GetCoursesCreatedByUserAsync(int userId);
         Task<List<Course>> GetCoursesByCategoryAsync(int categoryId);
+        Task<List<Course>> GetRecommendedCoursesAsync(int userId);
         Task AddCourseAsync(Course course);
+        Task EnrolCourse(CourseEnrolment courseEnrolment);
+        Task<bool> FindEnrolmentAsync(int userId, int courseId);
+        Task DeleteEnrolmentAsync(int userId, int courseId);
         Task UpdateCourseAsync(Course course);
         Task DeleteCourseAsync(int courseId);
         Task<bool> FindCourseAsync(int courseId);

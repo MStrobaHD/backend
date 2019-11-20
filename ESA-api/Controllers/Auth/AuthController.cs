@@ -57,7 +57,8 @@ namespace ESA_api.Controllers.Auth
             var claims = new[]
             {
                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-               new Claim(ClaimTypes.Name, userFromRepo.Username)
+               new Claim(ClaimTypes.Name, userFromRepo.Username),
+               new Claim(ClaimTypes.Role, userFromRepo.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.UserRepository.NormalUser
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         Task<User> GetUserDataAsync(int userId);
         Task<User> GetUserStatisticsAsync(int userId);

@@ -9,5 +9,6 @@ namespace ESA_api.Services.Education.ExamResultService
     public interface IExamResultService
     {
         Task<int> AddExamResultAsync(ExamResultAddDTO examResultAddDTO);
+        Task<List<ExamResultAddDTO>> GetExamResultsAsync(int userId);
     }
 }

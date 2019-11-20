@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESA_api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Repositories.Education.ExamResultRepository
 {
@@ -19,6 +20,11 @@ namespace ESA_api.Repositories.Education.ExamResultRepository
         {
             _context.ExamResult.Add(examResult);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<ExamResult>> GetExamResultsAsync(int userId)
+        {
+            return await _context.ExamResult.Where(exam => exam.UserId == userId).ToListAsync();
         }
     }
 }

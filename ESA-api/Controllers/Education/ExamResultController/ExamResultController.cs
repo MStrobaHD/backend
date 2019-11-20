@@ -30,5 +30,19 @@ namespace ESA_api.Controllers.Education.ExamResultController
             var result = await _service.AddExamResultAsync(examResultAddDTO);
             return Ok(result);
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetCourseExamsAsync(int userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetExamResultsAsync(userId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
     }
 }
