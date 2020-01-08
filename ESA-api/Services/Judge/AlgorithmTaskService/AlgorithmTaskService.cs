@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.Custom;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
+using ESA_api.Model;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 
 namespace ESA_api.Services.Judge.AlgorithmTaskService
@@ -20,20 +21,27 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
             _mapper = mapper;
         }
 
+        public async Task<int> AddAlgorithmTaskDTO(AlgorithmTaskAddDTO algorithmTaskAddDTO)
+        {
+            var task = _mapper.Map<AlgorithmTask>(algorithmTaskAddDTO);
+            await _repository.AddAlgorithmTaskAsync(task);
+            return task.Id;
+        }
+
         public async Task<AlgorithmTaskListForDisplayDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId)
         {
             var task = await _repository.GetAlgorithmTasksForSolveAsync(algorithmTaskId);
 
-            //AlgorithmParameter parametr = new AlgorithmParameter();
-            //parametr.Id = task.Id;
-            //parametr.AlgorithTaskName = task.AlgorithmTaskName;
-            //parametr.Description = task.Description;
-            //parametr.Author = task.User.Username;
-            //parametr.Complexity = task.Complexity.ComplexityName;
-            //parametr.Input = task.VerificationData.InputData;
-            //parametr.Output = task.VerificationData.OutputData;
-            //parametr.CategoryName = task.AlgorithmCategory.AlgorithmCategoryName;
-            //parametr.LevelName = task.Level.OutputData;
+            // AlgorithmParameter parametr = new AlgorithmParameter();
+            // parametr.Id = task.Id;
+            // parametr.AlgorithTaskName = task.AlgorithmTaskName;
+            // parametr.Description = task.Description;
+            // parametr.Author = task.User.Username;
+            // parametr.Complexity = task.Complexity.ComplexityName;
+            // parametr.Input = task.VerificationData.InputData;
+            // parametr.Output = task.VerificationData.OutputData;
+            // parametr.CategoryName = task.AlgorithmCategory.AlgorithmCategoryName;
+            // parametr.LevelName = task.Level.OutputData;
 
 
             return _mapper.Map<AlgorithmTaskListForDisplayDTO>(task);

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
 using ESA_api.Mapping.DTO.EnrolmentDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Education.CourseRepository;
 
 namespace ESA_api.Services.Education.CourseService
@@ -119,9 +119,9 @@ namespace ESA_api.Services.Education.CourseService
             foreach (var course in mappedAllCourses)
             {
                 
-                    if (mappedenlisted.Contains(course))
+                    if (mappedenlisted.Any(courseExist => courseExist.Id == course.Id))
                     {
-                    return mappedenlisted;
+                    //return mappedenlisted;
                     } else
                     {
                         noEnroledCourses.Add(course);

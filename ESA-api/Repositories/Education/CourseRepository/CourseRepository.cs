@@ -1,5 +1,5 @@
 ﻿using ESA_api.Mapping.DTO.CommonDTO.CategorysDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Common.CategoryRepository;
 using Microsoft.EntityFrameworkCore;
 using System;

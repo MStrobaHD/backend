@@ -1,4 +1,4 @@
-﻿using ESA_api.Models;
+﻿using ESA_api.Model;
 using ESA_api.Repositories.Auth;
 using System;
 using System.Collections.Generic;

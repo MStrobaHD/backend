@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.ExamResultDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Education.ExamResultRepository;
 
 namespace ESA_api.Services.Education.ExamResultService

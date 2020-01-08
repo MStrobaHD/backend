@@ -11,8 +11,17 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.8.0" />
+    <PackageReference Include="DotNetGraph" Version="2.0.0" />
+    <PackageReference Include="Graphviz" Version="2.38.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="GraphViz.NET" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Metrics" Version="2.9.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
@@ -27,8 +36,6 @@
     <Folder Include="Controllers\Education\FlashcardSetController\" />
     <Folder Include="Controllers\Education\FlashcardController\" />
     <Folder Include="Controllers\Judgement\AlgorithmTaskController\" />
-    <Folder Include="Controllers\Judgement\SolutionController\" />
-    <Folder Include="Controllers\Judgement\VerdictController\" />
     <Folder Include="Controllers\UserAction\NormalUser\" />
     <Folder Include="Controllers\UserAction\PriviligedUser\" />
     <Folder Include="Mapping\DTO\CommonDTO\FileSharesDTO\" />

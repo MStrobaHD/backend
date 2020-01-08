@@ -14,9 +14,10 @@ using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.ComplexitysDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.LevelsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.RestrictionsDTO;
+using ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,9 +37,10 @@ namespace ESA_api.Mapping
             CreateMap<ComplexityListDTO, Complexity>().ReverseMap();
             // AlgorithmCategory mapping
             CreateMap<AlgorithmCategoryDTO, AlgorithmCategory>().ReverseMap();
+            CreateMap<AlgorithmTaskAddDTO, AlgorithmTask>().ReverseMap();
             CreateMap<AlgorithmCategoryListDTO, AlgorithmCategory>().ReverseMap();
-            // Restriction mapping
-            CreateMap<RestrictionAddDTO, Restriction>().ReverseMap();
+            // Verdict  mapping
+            CreateMap<VerdictAddDTO, Verdict>().ReverseMap();
             // Level mapping
             CreateMap<LevelDTO, Level>().ReverseMap();
             CreateMap<LevelAddDTO, Level>().ReverseMap();
@@ -59,7 +61,7 @@ namespace ESA_api.Mapping
             CreateMap<CourseEnlistedDTO, Course>().ReverseMap();
 
             // Exam mapping
-            CreateMap<ExamAddDTO, Exam>();
+            CreateMap<ExamDTO, Exam>().ReverseMap();
             CreateMap<ExamListDTO, Exam>().ReverseMap();
             CreateMap<ExamResultAddDTO, ExamResult>().ReverseMap();
 

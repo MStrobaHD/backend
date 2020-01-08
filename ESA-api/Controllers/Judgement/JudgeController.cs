@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ESA_api.Mapping.Custom;
 using ESA_api.Mapping.DTO.JudgeDTO.JudgmentDTO;
-using ESA_api.Models;
-using ESA_api.Services.Judge.ExternalService;
+using ESA_api.Model;
+using ESA_api.Services.Judge.CodeAnalyzeService;
+using ESA_api.Services.Judge.JudgeEngineService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,73 +16,114 @@ namespace ESA_api.Controllers.Judgement
     [ApiController]
     public class JudgeController : ControllerBase
     {
-        private readonly AppDatabaseContext _context;
-        private readonly IExternalService _service;
+        private readonly ICodeAnalyzeService _codeAnalyzeService;
+        private readonly IJudgeEngineService _judgeEngineService;
 
-        public JudgeController(AppDatabaseContext context, IExternalService service)
+        public JudgeController(ICodeAnalyzeService codeAnalyzeService,
+                               IJudgeEngineService judgeEngineService)
         {
-            _context = context;
-            _service = service;
+            _codeAnalyzeService = codeAnalyzeService;
+            _judgeEngineService = judgeEngineService;
         }
 
-        // POST: api/Course
-        //[HttpPost]
-        //public async Task<IActionResult> AddCourseAsync([FromBody] SourceCode sourceCode)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    // source code to file
-        //    // source code calculate coplexity
-        //    // 
-
-
-
-        //    System.Diagnostics.Process process = new System.Diagnostics.Process();
-        //    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-        //   // startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-
-        //    // run cmd in hidden mode
-        //    startInfo.FileName = "cmd.exe";
-        //    // run csc.exe <filename.cs> -> compile file to exe
-        //    startInfo.Arguments = "csc.exe";
-        //    process.StartInfo = startInfo;
-        //    process.Start();
-
-
-
-        //    return Ok(startInfo);
-        //}
+        [HttpPost("controlFlowGraph")]
+        public async Task<IActionResult> GetControlFlowGraphAsync([FromBody] Source source)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = _codeAnalyzeService.CreateControlFlowGraphForDisplay(source.source_code);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpPost("metrics")]
+        public async Task<IActionResult> GetMetrics([FromBody] Source source)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = _codeAnalyzeService.GetMetricsAsync(source.source_code);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
         [HttpPost]
-        public async Task<IActionResult> AddCourseAsync([FromBody] Submission submission)
+        public async Task<IActionResult> CompileAndExecuteCode([FromBody] Submission submission)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            var token = await _judgeEngineService.createSubmissionAsync(submission);
 
-            var submissionPrepared =  _service.ReplaceAsync(submission);
-            var token = await _service.createSubmissionAsync(submissionPrepared);
-
-            if(token != null)
+            if (token != null)
             {
                 JsonCompilationResult result;
-                result = await _service.GetResultAsync(token);
+                result = await _judgeEngineService.GetResultAsync(token);
 
                 while (result.stdout == null && result.compile_output == null)
                 {
-                    result = await _service.GetResultAsync(token);
+                    result = await _judgeEngineService.GetResultAsync(token);
                 }
-                var finalResult = await _service.GetFinalResultAsync(token);
+                var finalResult = await _judgeEngineService.GetFinalResultAsync(token);
                 return Ok(finalResult);
-            } else
+            }
+            else
             {
                 return BadRequest("Token nieprawidłowy lub jego brak");
             }
- 
+
+        }
+        [HttpPost("input")]
+        public async Task<IActionResult> CompileAndExecuteCodeWithInput([FromBody] SubmissionWithInput submission)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var token = await _judgeEngineService.createSubmissionWithInputAsync(submission);
+
+            if (token != null)
+            {
+                JsonCompilationResult result;
+                result = await _judgeEngineService.GetResultAsync(token);
+
+                while (result.stdout == null && result.compile_output == null)
+                {
+                    result = await _judgeEngineService.GetResultAsync(token);
+                }
+                var finalResult = await _judgeEngineService.GetFinalResultAsync(token);
+                return Ok(finalResult);
+            }
+            else
+            {
+                return BadRequest("Token nieprawidłowy lub jego brak");
+            }
+
+        }
+        [HttpPost("judge")]
+        public async Task<IActionResult> JudgeSolutionAsync([FromBody] SubmissionWithInput submission)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _judgeEngineService.JudgeSolution(submission);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
     }
 }

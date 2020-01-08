@@ -3,7 +3,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using ESA_api.Helpers;
 using ESA_api.Mapping.DTO.CommonDTO.CloudUploadDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Common.CloudUploadRepository;
 using Microsoft.Extensions.Options;
 using System;

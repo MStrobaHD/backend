@@ -1,4 +1,4 @@
-﻿using ESA_api.Models;
+﻿using ESA_api.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ESA_api.Repositories.Judge.VerdictRepository
 {
-    interface IVerdictRepository
+    public interface IVerdictRepository
     {
         Task<List<Verdict>> GetVerdictsAsync();
         Task<Verdict> GetVerdictAsync(int verdictId);

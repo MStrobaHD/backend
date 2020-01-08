@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Helpers;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Common.CloudUploadRepository;
@@ -20,6 +20,7 @@ using ESA_api.Repositories.Judge.AlgorithmCategoryRepository;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Repositories.Judge.ComplexityRepository;
 using ESA_api.Repositories.Judge.LevelRepository;
+using ESA_api.Repositories.Judge.VerdictRepository;
 using ESA_api.Repositories.Judge.VerificationDataRepository;
 using ESA_api.Repositories.UserRepository.NormalUser;
 using ESA_api.Services.Auth;
@@ -32,9 +33,11 @@ using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Education.QuestionService;
 using ESA_api.Services.Judge.AlgorithmCategoryService;
 using ESA_api.Services.Judge.AlgorithmTaskService;
+using ESA_api.Services.Judge.CodeAnalyzeService;
 using ESA_api.Services.Judge.ComplexityService;
-using ESA_api.Services.Judge.ExternalService;
+using ESA_api.Services.Judge.JudgeEngineService;
 using ESA_api.Services.Judge.LevelService;
+using ESA_api.Services.Judge.VerdictService;
 using ESA_api.Services.Judge.VerificationDataService;
 using ESA_api.Services.UserAction;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -150,9 +153,12 @@ namespace ESA_api
 
             services.AddScoped<IVerificationDataRepository, VerificationRepository>();
             services.AddScoped<IVerificationDataService, VerificationDataService>();
-            
-            services.AddScoped<IExternalService, ExternalService>();
 
+            services.AddScoped<IVerdictRepository, VerdictRepository>();
+            services.AddScoped<IVerdictService, VerdictService>();
+
+            services.AddScoped<ICodeAnalyzeService, CodeAnalyzeService>();
+            services.AddScoped<IJudgeEngineService, JudgeEngineService>();
             // User Controller
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();

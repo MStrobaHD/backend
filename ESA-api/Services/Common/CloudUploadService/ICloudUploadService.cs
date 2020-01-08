@@ -1,5 +1,5 @@
 ﻿using ESA_api.Mapping.DTO.CommonDTO.CloudUploadDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

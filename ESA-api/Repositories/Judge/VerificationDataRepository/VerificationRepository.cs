@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ESA_api.Models;
+using ESA_api.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Repositories.Judge.VerificationDataRepository

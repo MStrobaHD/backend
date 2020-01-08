@@ -6,7 +6,7 @@ using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.MultiSelectQuestionDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.OrderedBlockDTO;
-using ESA_api.Models;
+using ESA_api.Model;
 using ESA_api.Repositories.Education.QuestionRepository;
 
 namespace ESA_api.Services.Education.QuestionService

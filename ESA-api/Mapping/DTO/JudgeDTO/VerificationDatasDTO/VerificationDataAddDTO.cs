@@ -9,5 +9,6 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO
     {
         public string InputData { get; set; }
         public string OutputData { get; set; }
+        public int AlgorithmTaskID { get; set; }
     }
 }
