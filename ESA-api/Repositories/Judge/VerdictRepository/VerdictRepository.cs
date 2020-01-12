@@ -48,9 +48,9 @@ namespace ESA_api.Repositories.Judge.VerdictRepository
             return await _context.Verdict.FindAsync(verdictId);
         }
 
-        public async Task<List<Verdict>> GetVerdictsAsync()
+        public async Task<List<Verdict>> GetUserVerdictsAsync(int userId)
         {
-            return await _context.Verdict.ToListAsync();
+            return await _context.Verdict.Where(verdict => verdict.UserId == userId).ToListAsync();
         }
 
         public async Task UpdateVerdictAsync(Verdict verdict)

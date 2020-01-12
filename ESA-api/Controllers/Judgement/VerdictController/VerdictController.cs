@@ -30,5 +30,20 @@ namespace ESA_api.Controllers.Judgement.VerdictController
             var result = await _service.AddVerdictAsync(verdictAddDTO);
             return Ok(result);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserVerdictsAsync(int userId)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetUserVerdictsAsync(userId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
     }
 }

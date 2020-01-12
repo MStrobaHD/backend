@@ -74,7 +74,8 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
                 .Include(user => user.User)
                 .Include(complexity => complexity.Complexity)
                 .Include(algorithmCategory => algorithmCategory.AlgorithmCategory)
-                .Include(level => level.Level).SingleOrDefaultAsync();
+                .Include(level => level.Level)
+                .Include(data => data.VerificationData).SingleOrDefaultAsync();
         }
 
         public async Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask)

@@ -8,7 +8,7 @@ namespace ESA_api.Repositories.Judge.VerdictRepository
 {
     public interface IVerdictRepository
     {
-        Task<List<Verdict>> GetVerdictsAsync();
+        Task<List<Verdict>> GetUserVerdictsAsync(int userId);
         Task<Verdict> GetVerdictAsync(int verdictId);
         Task AddVerdictAsync(Verdict verdict);
         Task UpdateVerdictAsync(Verdict verdict);

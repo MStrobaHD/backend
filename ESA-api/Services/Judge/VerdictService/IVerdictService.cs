@@ -9,5 +9,6 @@ namespace ESA_api.Services.Judge.VerdictService
     public interface IVerdictService
     {
         Task<int> AddVerdictAsync(VerdictAddDTO verdictAddDTO);
+        Task<List<VerdictDTO>> GetUserVerdictsAsync(int userId);
     }
 }
