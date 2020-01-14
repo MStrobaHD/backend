@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Mapping.Custom;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
+using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Model;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 
@@ -28,7 +29,7 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
             return task.Id;
         }
 
-        public async Task<AlgorithmTaskListForDisplayDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId)
+        public async Task<AlgorithmTaskForSolveDTO> GetAlgorithmTaskForSolveAsync(int algorithmTaskId)
         {
             var task = await _repository.GetAlgorithmTasksForSolveAsync(algorithmTaskId);
 
@@ -44,13 +45,38 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
             // parametr.LevelName = task.Level.OutputData;
 
 
-            return _mapper.Map<AlgorithmTaskListForDisplayDTO>(task);
+            return _mapper.Map<AlgorithmTaskForSolveDTO>(task);
         }
 
         public async Task<List<AlgorithmTaskListForDisplayDTO>> GetAlgorithmTasksForDisplayAsync()
         {
-            var tasks = await _repository.GetAlgorithmTasksForDisplayAsync();
-            return _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(tasks);
+            //var task = await _repository.GetRateListByIdAsync(task);
+            AlgorithmTaskListForDisplayDTO listItem = new AlgorithmTaskListForDisplayDTO();
+            int rateCounter = 0;
+            int rateSum = 0;
+             var tasks = await _repository.GetAlgorithmTasksForDisplayAsync();
+
+           var mappedTask =  _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(tasks);
+
+            foreach (var item in mappedTask)
+            {
+                var result = await _repository.GetRateListByIdAsync(item.Id);
+                foreach (var rate in result)
+                {
+                    rateSum += rate.Points;
+                    rateCounter++;
+                }
+                int rateAverage = rateSum / rateCounter;
+                item.RatePoints = rateAverage;
+            }
+            return mappedTask;
+        }       
+
+        public async Task<int> RateAsync(RatingDTO ratingDTO)
+        {
+            var task = _mapper.Map<Rating>(ratingDTO);
+            await _repository.RateAsync(task);
+            return task.Id;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ESA_api.Controllers.Judgement.VerdictController
             var result = await _service.AddVerdictAsync(verdictAddDTO);
             return Ok(result);
         }
-        [HttpGet]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserVerdictsAsync(int userId)
         {
 

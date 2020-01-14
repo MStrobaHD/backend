@@ -15,6 +15,9 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO
         public int ComplexityOrder { get; set; }
         public int LinesOfCode { get; set; }
         public string Solution { get; set; }
+        public int CyclomaticComplexity { get; set; }
+        public int NumberOfDecision { get; set; }
+        public int NumberOfAssignment { get; set; }
         public int UserId { get; set; }
         public int AlgorithmTaskId { get; set; }
     }

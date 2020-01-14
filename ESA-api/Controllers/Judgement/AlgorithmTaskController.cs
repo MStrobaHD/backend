@@ -30,6 +30,17 @@ namespace ESA_api.Controllers.Judgement
             var result = await _service.AddAlgorithmTaskDTO(algorithmTaskAddDTO);
             return Ok(result);
         }
+        [HttpPost("rating")]
+        public async Task<IActionResult> RateAsync([FromBody] RatingDTO ratingDTO)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.RateAsync(ratingDTO);
+            return Ok(result);
+        }
         // GET: api/Course
         [HttpGet]
         public async Task<IActionResult> GetAlgorithmTasksForDisplayAsync()

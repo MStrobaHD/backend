@@ -129,7 +129,7 @@ namespace ESA_api.Services.Judge.JudgeEngineService
             string verdictName;
             string submissionToken;
             Verdict verdict = new Verdict();
-            var task = await _repository.GetAlgorithmTasksForSolveAsync(7); // return specific task with parameters
+            var task = await _repository.GetAlgorithmTasksForSolveAsync(submission.algorithmTaskId  ); // return specific task with parameters
 
 
             if (submission.stdin != "")
@@ -154,6 +154,11 @@ namespace ESA_api.Services.Judge.JudgeEngineService
             if (result.compile_output != null)
             {
                 verdictName = Verdicts.CompilationError.ToString();
+                verdict.VerdictName = verdictName;
+                verdict.Solution = submission.source_code;
+                verdict.UserId = submission.userId;
+                verdict.AlgorithmTaskId = task.Id;
+                await _verdictRepository.AddVerdictAsync(verdict);
             }
             else
             {
@@ -165,20 +170,21 @@ namespace ESA_api.Services.Judge.JudgeEngineService
 
                 verdict.VerdictName = verdictName;
                 verdict.Solution = submission.source_code;
-                //verdikt.ElementaryOperation = 
+                //verdict.ElementaryOperation = 
                 verdict.Time = Convert.ToDecimal(time);
                 verdict.Memory = Convert.ToDecimal(submissionResult.memory);
                 //verdict.ComplexityOrder = 
                 verdict.LinesOfCode = metrics.LinesOfCode;
-                //verdict.CyclomaticComplexity = metrics.CyclomaticComplexity;
-                //verdict.NumberOfDecision = metrics.NumberOfDecision;
-                //verdict.NumberOfAssignment = metrics.NumberOfAssignment;
+                verdict.CyclomaticComplexity = metrics.CyclomaticComplexity;
+                verdict.NumberOfDecision = metrics.NumberOfDecision;
+                verdict.NumberOfAssignment = metrics.NumberOfAssignment;
                 verdict.UserId = submission.userId;
                 verdict.AlgorithmTaskId = task.Id;
 
                 // save to verdict to db
                 await _verdictRepository.AddVerdictAsync(verdict);
             }
+            
 
             return verdictName;
         }
@@ -186,6 +192,8 @@ namespace ESA_api.Services.Judge.JudgeEngineService
         private string Judge(JsonAfterCompilationResult submissionResult, AlgorithmTask task, SubmissionWithInput submission)
         {
             string verdict = "";
+            string stdout;
+            stdout = submissionResult.stdout.Replace("\n","");
             foreach (var data in task.VerificationData)
             {
                 if (submissionResult.stderr != null)
@@ -196,13 +204,21 @@ namespace ESA_api.Services.Judge.JudgeEngineService
                 {
                     verdict = Verdicts.RuntimeError.ToString();
                 }
-                else if (submission.stdin == data.InputData && submissionResult.stdout == data.OutputData)
+                else if (submission.stdin == data.InputData && stdout == data.OutputData)
                 {
                     verdict = Verdicts.Accepted.ToString();
                 }
-                else if (submission.stdin == data.InputData && submissionResult.stdout != data.OutputData)
+                else if (submission.stdin == data.InputData && stdout != data.OutputData)
                 {
                     verdict = Verdicts.NotAccepted.ToString();
+                }
+                else if (stdout != data.OutputData)
+                {
+                    verdict = Verdicts.NotAccepted.ToString();
+                }
+                else if (stdout == data.OutputData)
+                {
+                    verdict = Verdicts.Accepted.ToString();
                 }
                 else if (Convert.ToDecimal(submissionResult.time) > task.TimeLimit)
                 {

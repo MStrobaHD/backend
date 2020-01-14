@@ -11,5 +11,6 @@ namespace ESA_api.Mapping.Custom
         public int language_id { get; set; }
         public string stdin { get; set; }
         public int userId { get; set; }
+        public int algorithmTaskId { get; set; }
     }
 }

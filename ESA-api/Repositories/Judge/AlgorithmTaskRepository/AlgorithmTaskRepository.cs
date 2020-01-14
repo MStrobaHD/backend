@@ -78,6 +78,17 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
                 .Include(data => data.VerificationData).SingleOrDefaultAsync();
         }
 
+        public async Task<List<Rating>> GetRateListByIdAsync(int id)
+        {
+            return await _context.Rating.Where(rate => rate.AlgorithmTaskId == id).ToListAsync();
+        }
+
+        public async Task RateAsync(Rating rating)
+        {
+            _context.Rating.Add(rating);
+            await _context.SaveChangesAsync(); ;
+        }
+
         public async Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask)
         {
             _context.Entry(algorithmTask).State = EntityState.Modified;

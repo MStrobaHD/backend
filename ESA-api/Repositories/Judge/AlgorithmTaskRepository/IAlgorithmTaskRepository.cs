@@ -18,5 +18,7 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
         Task<bool> FindAlgorithmTaskAsync(int algorithmTaskId);
         Task<bool> AlgorithmTaskExistsAsync(int algorithmTaskId);
         Task<AlgorithmTask> GetAlgorithmTaskFromDatabaseAsync(int algorithmTaskId);
+        Task RateAsync(Rating rating);
+        Task<List<Rating>> GetRateListByIdAsync(int id);
     }
 }

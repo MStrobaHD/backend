@@ -59,6 +59,7 @@ namespace ESA_api.Mapping
             CreateMap<UserEnlistedDTO, User>().ReverseMap();
             CreateMap<CourseEnrolmentEnlistedDTO, CourseEnrolment>().ReverseMap();
             CreateMap<CourseEnlistedDTO, Course>().ReverseMap();
+            CreateMap<RatingDTO, Rating>().ReverseMap();
 
             // Exam mapping
             CreateMap<ExamDTO, Exam>().ReverseMap();
@@ -68,6 +69,7 @@ namespace ESA_api.Mapping
             CreateMap<CategoryDTO, Category>().ReverseMap();
             // AlgorithmTask mapping
             CreateMap<AlgorithmTaskListForDisplayDTO, AlgorithmTask>().ReverseMap();
+            CreateMap<AlgorithmTaskForSolveDTO, AlgorithmTask>().ReverseMap();
             // Lesson mapping
             CreateMap<LessonAddDTO, Lesson>();
             CreateMap<ServerAssetAddDTO, ServerAsset>();
@@ -80,6 +82,8 @@ namespace ESA_api.Mapping
             CreateMap<MultiSelectQuestionAddDTO, MultiSelectQuestion>();
             // OrderedBlock mapping
             CreateMap<OrderedBlockAddDTO, OrderedBlock>();
+            // Verdict DTO
+            CreateMap<VerdictDTO, Verdict>().ReverseMap();
         }
     }
 }
