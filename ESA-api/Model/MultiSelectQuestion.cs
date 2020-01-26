@@ -13,7 +13,7 @@ namespace ESA_api.Model
         public string OptionTwo { get; set; }
         public string OptionThree { get; set; }
         public string OptionFour { get; set; }
-
+        public string Hint { get; set; }
         public virtual Exam Exam { get; set; }
     }
 }

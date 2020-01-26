@@ -10,5 +10,6 @@ namespace ESA_api.Services.Judge.VerdictService
     {
         Task<int> AddVerdictAsync(VerdictAddDTO verdictAddDTO);
         Task<List<VerdictDTO>> GetUserVerdictsAsync(int userId);
+        Task<VerdictDTO> GetVerdictAsync(int verdictId);
     }
 }

@@ -9,7 +9,8 @@ namespace ESA_api.Mapping.DTO.EducationDTO.LessonsDTO
     {
         public int Id { get; set; }
         public string LessonTitle { get; set; }
-        public int? CloudAssetId { get; set; }
-        public int? ServerAssetId { get; set; }
+        public int? Priority { get; set; }
+        public virtual ICollection<CloudAssetAddDTO> CloudAsset { get; set; }
+        public virtual ICollection<ServerAssetAddDTO> ServerAsset { get; set; }
     }
 }

@@ -32,5 +32,11 @@ namespace ESA_api.Services.Judge.VerdictService
             var verdicts = await _repository.GetUserVerdictsAsync(userId);
             return _mapper.Map<List<VerdictDTO>>(verdicts);
         }
+
+        public async Task<VerdictDTO> GetVerdictAsync(int verdictId)
+        {
+            var verdicts = await _repository.GetVerdictAsync(verdictId);
+            return _mapper.Map<VerdictDTO>(verdicts);
+        }
     }
 }

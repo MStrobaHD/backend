@@ -33,12 +33,26 @@ namespace ESA_api.Controllers.Judgement.VerdictController
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserVerdictsAsync(int userId)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             var result = await _service.GetUserVerdictsAsync(userId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("details/{verdictId}")]
+        public async Task<IActionResult> GetVerdictAsync(int verdictId)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetVerdictAsync(verdictId);
             if (result == null)
             {
                 return NotFound();

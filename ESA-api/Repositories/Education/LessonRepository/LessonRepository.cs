@@ -52,6 +52,8 @@ namespace ESA_api.Repositories.Education.LessonRepository
         {
             return await _context.Lesson
                 .Where(courseLessons => courseLessons.CourseId == courseId)
+                .Include(cloud => cloud.CloudAsset)
+                .Include(external => external.ServerAsset)
                 .ToListAsync();
         }
 

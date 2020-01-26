@@ -71,9 +71,10 @@ namespace ESA_api.Mapping
             CreateMap<AlgorithmTaskListForDisplayDTO, AlgorithmTask>().ReverseMap();
             CreateMap<AlgorithmTaskForSolveDTO, AlgorithmTask>().ReverseMap();
             // Lesson mapping
-            CreateMap<LessonAddDTO, Lesson>();
-            CreateMap<ServerAssetAddDTO, ServerAsset>();
-            CreateMap<CloudAssetAddDTO, CloudAsset>();
+            CreateMap<LessonAddDTO, Lesson>().ReverseMap();
+            CreateMap<LessonListDTO, Lesson>().ReverseMap();
+            CreateMap<ServerAssetAddDTO, ServerAsset>().ReverseMap();
+            CreateMap<CloudAssetAddDTO, CloudAsset>().ReverseMap();
             // Exam mapping
             CreateMap<ExamAddDTO, Exam>();
             // Question mapping

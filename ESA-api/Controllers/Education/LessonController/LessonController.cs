@@ -54,6 +54,20 @@ namespace ESA_api.Controllers.Education.LessonController
             var result = await _service.AddCloudAssetAsync(cloudAssetAddDTO);
             return Ok(result);
         }
+        [HttpGet("list/{courseId}")]
+        public async Task<IActionResult> GetCourseLessonsAsync(int courseId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetCourseLessonsAsync(courseId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
     }
 

@@ -14,5 +14,6 @@ namespace ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.MultiSelectQuestionDTO
         public string OptionTwo { get; set; }
         public string OptionThree { get; set; }
         public string OptionFour { get; set; }
+        public string Hint { get; set; }
     }
 }
