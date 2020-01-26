@@ -11,5 +11,7 @@ namespace ESA_api.Repositories.Common.CloudUploadRepository
         Task AddCloudAssetAsync(CloudAsset asset);
         Task DeleteCloudAssetAsync(int assetId);
         Task<CloudAsset> GetCloudAssetAsync(int assetId);
+        Task<List<CloudAsset>> GetUserAddedMaterialsAsync(int userId);
+        Task<List<CloudAsset>> GetCourseOwnerMaterialsAsync(int assetId);
     }
 }

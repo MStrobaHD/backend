@@ -36,5 +36,18 @@ namespace ESA_api.Repositories.Common.CloudUploadRepository
                     .FirstOrDefaultAsync(p => p.Id == assetId);
         }
 
+        public async Task<List<CloudAsset>> GetCourseOwnerMaterialsAsync(int userId)
+        {
+            return await _context.CloudAsset
+                    .Where(asset => asset.UserId == userId)
+                    .ToListAsync();
+        }
+
+        public async Task<List<CloudAsset>> GetUserAddedMaterialsAsync(int userId)
+        {
+            return await _context.CloudAsset
+                    .Where(asset => asset.UserId == userId)
+                    .ToListAsync();
+        }
     }
 }

@@ -10,7 +10,8 @@ namespace ESA_api.Services.Common.CloudUploadService
     public interface ICloudUploadService
     {
         Task<CloudinaryAsset> AddCloudAssetAsync(CloudinaryAsset cloudinaryAsset, int id, int lessonId);
-        Task<CloudAsset> GetAsset(int assetId);
+        Task<List<CloudAssetDTO>> GetUserAddedMaterialAsync(int userId);
+        Task<List<CloudAssetDTO>> GetCourseOwnerAddedMaterialAsync(int userId);
         Task DeleteAsset(int assetId);
     }
 }

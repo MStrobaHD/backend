@@ -81,9 +81,15 @@ namespace ESA_api.Services.Common.CloudUploadService
             throw new NotImplementedException();
         }
 
-        public Task<CloudAsset> GetAsset(int assetId)
+        public Task<CloudAssetDTO> GetCourseOwnerAddedMaterialsAsync(int userId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<CloudAssetDTO>> GetUserAddedMaterialsAsync(int userId)
+        {
+            var assets = await _repository.GetUserAddedMaterialsAsync(userId);
+            return _mapper.Map<List<CloudAssetDTO>>(assets);
         }
     }
 }
