@@ -8,9 +8,6 @@
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
 
 
-    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
-
-
   </PropertyGroup>
 
 
