@@ -1,5 +1,5 @@
 ﻿using ESA_api.Mapping.Custom;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 using ESA_api.Repositories.Judge.VerdictRepository;
 using ESA_api.Services.Judge.CodeAnalyzeService;

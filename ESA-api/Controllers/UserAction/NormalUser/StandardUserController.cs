@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ESA_api.Mapping.DTO.UserProfileDTO;
 using ESA_api.Services.Common.CloudUploadService;
 using ESA_api.Services.UserAction;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Controllers.UserAction
 {
@@ -29,7 +31,7 @@ namespace ESA_api.Controllers.UserAction
             {
                 return BadRequest(ModelState);
             }
-            var result = await _cloudUploadService.GetUserAddedMaterialAsync(userId);
+            var result = await _cloudUploadService.GetUserAddedMaterialsAsync(userId);
             if (result == null)
             {
                 return NotFound();
@@ -49,6 +51,26 @@ namespace ESA_api.Controllers.UserAction
                 return NotFound();
             }
             return Ok(result);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUserInformation(int id, UserDTO userDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (userDTO == null)
+            {
+                throw new ArgumentNullException(nameof(userDTO));
+            }
+
+            try
+            {
+                var result = await _service.UpdateUserAsync(id, userDTO);
+            }
+            catch (DbUpdateConcurrencyException)
+            {}
+            return Ok();
         }
     }
 }

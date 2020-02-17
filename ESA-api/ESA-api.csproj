@@ -6,7 +6,16 @@
     <RootNamespace>ESA_api</RootNamespace>
     <UserSecretsId>ed63938f-81d1-4ac9-9823-1c00a359715e</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+
+
+    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+
+
   </PropertyGroup>
+
+
+
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -28,23 +37,19 @@
   <ItemGroup>
     <Folder Include="Controllers\Common\BadgeController\" />
     <Folder Include="Controllers\Common\Enrolments\" />
-    <Folder Include="Controllers\Education\FlashcardSetController\" />
-    <Folder Include="Controllers\Education\FlashcardController\" />
     <Folder Include="Controllers\Judgement\AlgorithmTaskController\" />
     <Folder Include="Controllers\UserAction\PriviligedUser\" />
     <Folder Include="Mapping\DTO\CommonDTO\FileSharesDTO\" />
     <Folder Include="Mapping\DTO\CommonDTO\StatisticsDTO\" />
-    <Folder Include="Mapping\DTO\EducationDTO\FlashcardsDTO\" />
-    <Folder Include="Mapping\DTO\EducationDTO\FlashcardSetsDTO\" />
     <Folder Include="Repositories\Common\FileShareRepository\" />
     <Folder Include="Repositories\UserRepository\AdminUser\" />
 
     <Folder Include="Services\Common\BadgeService\" />
     <Folder Include="Services\Common\FileShareService\" />
     <Folder Include="Services\Common\StatisticsService\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
     <Folder Include="StaticFiles\Images" />
   </ItemGroup>
 </Project>

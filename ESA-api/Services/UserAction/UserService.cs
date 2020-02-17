@@ -24,5 +24,22 @@ namespace ESA_api.Services.UserAction
             var userData = await _repository.GetUserDataAsync(userId);
             return _mapper.Map<UserDTO>(userData);
         }
+
+        public async Task<List<UserDTO>> GetUsersAsync()
+        {
+            var users = await _repository.GetUsersAsync();
+            return _mapper.Map<List<UserDTO>>(users);
+        }
+
+        public async Task<int> UpdateUserAsync(int id, UserDTO userDTO)
+        {
+            var previousUser = await _repository.GetUserFromBaseAsync(id);
+            userDTO.Id = id;
+
+            var userInfo =  _mapper.Map(userDTO, previousUser);
+
+            await _repository.UpdateUserDataAsync(userInfo);
+            return userInfo.Id;
+        }
     }
 }

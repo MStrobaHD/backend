@@ -6,7 +6,7 @@ using AutoMapper;
 using ESA_api.Mapping.Custom;
 using ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Judge.AlgorithmTaskRepository;
 
 namespace ESA_api.Services.Judge.AlgorithmTaskService
@@ -66,8 +66,13 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
                     rateSum += rate.Points;
                     rateCounter++;
                 }
-                int rateAverage = rateSum / rateCounter;
-                item.RatePoints = rateAverage;
+                if (rateCounter > 0 && rateSum >0)
+                {
+                    int rateAverage = rateSum / rateCounter;
+                    item.RatePoints = rateAverage;
+                }
+               
+                
             }
             return mappedTask;
         }       

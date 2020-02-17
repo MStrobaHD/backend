@@ -51,6 +51,7 @@ namespace ESA_api.Controllers.Education.LessonController
             {
                 return BadRequest(ModelState);
             }
+
             var result = await _service.AddCloudAssetAsync(cloudAssetAddDTO);
             return Ok(result);
         }

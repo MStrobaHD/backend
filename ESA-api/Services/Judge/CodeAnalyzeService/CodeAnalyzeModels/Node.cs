@@ -20,4 +20,15 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService.CodeAnalyzeModels
         public string nodeDecision { get; set; }
         public List<int> linkedNodes { get; set; }
     }
+    public class MethodNode
+    {
+        public MethodNode(string methodName, List<Node> node)
+        {
+            this.methodName = methodName;
+            this.node = node;
+        }
+
+        public string methodName { get; set; }
+        public List<Node> node { get; set; }
+    }
 }

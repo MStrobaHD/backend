@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ESA_api.Mapping.Custom;
 using ESA_api.Mapping.DTO.JudgeDTO.JudgmentDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Services.Judge.CodeAnalyzeService;
 using ESA_api.Services.Judge.JudgeEngineService;
 using Microsoft.AspNetCore.Http;

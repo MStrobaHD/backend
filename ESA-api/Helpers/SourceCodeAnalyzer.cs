@@ -25,8 +25,8 @@ namespace ESA_api.Helpers
         public string CalculateElementaryOperation(string sourceCode)
         {
             string elementaryOperation = "int i = 0;";
-            string iteratelementaryOperation = "i++;";
-            string elementaryOperationResult = "Console.Writeline('Liczba operacji elementarnych = ', elementaryOperation);";
+            //string iteratelementaryOperation = "i++;";
+            //string elementaryOperationResult = "Console.Writeline('Liczba operacji elementarnych = ', elementaryOperation);";
 
             return elementaryOperation;
         }

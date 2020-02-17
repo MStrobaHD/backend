@@ -4,6 +4,8 @@ using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
 using ESA_api.Mapping.DTO.EducationDTO.ExamResultDTO;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
+using ESA_api.Mapping.DTO.EducationDTO.FlashcardsDTO;
+using ESA_api.Mapping.DTO.EducationDTO.FlashcardSetsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.MultiSelectQuestionDTO;
@@ -17,7 +19,7 @@ using ESA_api.Mapping.DTO.JudgeDTO.RestrictionsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +77,13 @@ namespace ESA_api.Mapping
             CreateMap<LessonListDTO, Lesson>().ReverseMap();
             CreateMap<ServerAssetAddDTO, ServerAsset>().ReverseMap();
             CreateMap<CloudAssetAddDTO, CloudAsset>().ReverseMap();
+            // Flashcard
+            CreateMap<FlashcardAddDTO, Flashcard>().ReverseMap();
+            CreateMap<FlashcardDTO, Flashcard>().ReverseMap();
+            CreateMap<FlashcardSetForFlashcardDTO, FlashcardSet>().ReverseMap();
+            CreateMap<FlashcardSetAddDTO, FlashcardSet>().ReverseMap();
+            CreateMap<FlashcardSetDTO, FlashcardSet>().ReverseMap();
+            CreateMap<FlashcardSetListDTO, FlashcardSet>().ReverseMap();
             // Exam mapping
             CreateMap<ExamAddDTO, Exam>();
             // Question mapping
@@ -83,6 +92,7 @@ namespace ESA_api.Mapping
             CreateMap<MultiSelectQuestionAddDTO, MultiSelectQuestion>();
             // OrderedBlock mapping
             CreateMap<OrderedBlockAddDTO, OrderedBlock>();
+            CreateMap<OrderedBlockListDTO, OrderedBlock>().ReverseMap();
             // Verdict DTO
             CreateMap<VerdictDTO, Verdict>().ReverseMap();
         }

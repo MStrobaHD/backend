@@ -1,4 +1,4 @@
-﻿using ESA_api.Model;
+﻿using ESA_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,8 @@ namespace ESA_api.Repositories.UserRepository.NormalUser
         Task<User> GetUserMarksAsync(int userId);
         Task<User> GetUserVerdictAsync(int userId);
         Task<User> GetUserBadgesAsync(int userId);
-        Task<User> UpdateUserDataAsync(int userId);
+        Task UpdateUserDataAsync(User user);
+        Task<User> GetUserFromBaseAsync(int id);
+        Task<List<User>> GetUsersAsync();
     }
 }

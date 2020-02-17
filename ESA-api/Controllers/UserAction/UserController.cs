@@ -33,5 +33,19 @@ namespace ESA_api.Controllers.UserAction
             }
             return Ok(result);
         }
+        [HttpGet()]
+        public async Task<IActionResult> GetUsersAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetUsersAsync();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
     }
 }

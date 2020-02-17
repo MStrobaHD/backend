@@ -8,8 +8,8 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
 {
     public interface ICodeAnalyzeService
     {
-        List<Node> CreateControlFlowGraph(string code);
-        CFG CreateControlFlowGraphForDisplay(string code);
+        List<MethodNode> CreateControlFlowGraph(string code);
+        List<CFG> CreateControlFlowGraphForDisplay(string code);
         Metrics GetMetricsAsync(string code);
     }
 }

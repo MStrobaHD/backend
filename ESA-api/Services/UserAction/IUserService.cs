@@ -9,5 +9,7 @@ namespace ESA_api.Services.UserAction
     public interface IUserService
     {
         Task<UserDTO> GetUserDataAsync(int userId);
+        Task<List<UserDTO>> GetUsersAsync();
+        Task<int> UpdateUserAsync(int id, UserDTO userDTO);
     }
 }

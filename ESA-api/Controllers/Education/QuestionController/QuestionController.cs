@@ -80,7 +80,7 @@ namespace ESA_api.Controllers.Education.QuestionController
             }
             return Ok(result);
         }
-        [HttpGet("orderedBlock")]
+        [HttpGet("orderedBlock/{examId}")]
         public async Task<IActionResult> GetOrderedBlocksFromExamAsync(int examId)
         {
             if (!ModelState.IsValid)

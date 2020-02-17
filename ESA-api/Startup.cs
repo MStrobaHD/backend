@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using ESA_api.Helpers;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Auth;
 using ESA_api.Repositories.Common.CategoryRepository;
 using ESA_api.Repositories.Common.CloudUploadRepository;
 using ESA_api.Repositories.Education.CourseRepository;
 using ESA_api.Repositories.Education.ExamRepository;
 using ESA_api.Repositories.Education.ExamResultRepository;
+using ESA_api.Repositories.Education.FlashcardRepository;
+using ESA_api.Repositories.Education.FlashcardSerRepository;
 using ESA_api.Repositories.Education.LessonRepository;
 using ESA_api.Repositories.Education.QuestionRepository;
 using ESA_api.Repositories.Judge.AlgorithmCategoryRepository;
@@ -29,6 +31,8 @@ using ESA_api.Services.Common.CloudUploadService;
 using ESA_api.Services.Education.CourseService;
 using ESA_api.Services.Education.ExamResultService;
 using ESA_api.Services.Education.ExamService;
+using ESA_api.Services.Education.FlashcardService;
+using ESA_api.Services.Education.FlashcardSetService;
 using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Education.QuestionService;
 using ESA_api.Services.Judge.AlgorithmCategoryService;
@@ -75,6 +79,8 @@ namespace ESA_api
             services.AddDirectoryBrowser();
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            
 
             services.AddHttpContextAccessor();
             services.AddSwaggerGen(c =>
@@ -141,6 +147,13 @@ namespace ESA_api
             services.AddScoped<ICloudUploadRepository, CloudRepository>();
             services.AddScoped<ICloudUploadService, CloudUploadService>();
 
+            services.AddScoped<IFlashcardSetRepository, FlashcardSetRepository>();
+            services.AddScoped<IFlashcardSetService, FlashcardSetService>();
+
+            services.AddScoped<IFlashcardRepository, FlashcardRepository>();
+            services.AddScoped<IFlashcardService, FlashcardService>();
+
+
             // Judge Controllers
             services.AddScoped<ILevelRepository, LevelRepository>();
             services.AddScoped<ILevelService, LevelService>();
@@ -177,7 +190,6 @@ namespace ESA_api
                 app.UseHsts();
             }
             app.UseSwagger();
-
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>

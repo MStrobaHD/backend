@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ESA_api.Model;
+using ESA_api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ESA_api.Repositories.UserRepository.NormalUser
@@ -28,7 +28,7 @@ namespace ESA_api.Repositories.UserRepository.NormalUser
                 .SingleOrDefaultAsync();
         }
 
-        public  Task<User> GetUserMarksAsync(int userId)
+        public Task<User> GetUserMarksAsync(int userId)
         {
             throw new NotImplementedException();
         }
@@ -43,9 +43,20 @@ namespace ESA_api.Repositories.UserRepository.NormalUser
             throw new NotImplementedException();
         }
 
-        public Task<User> UpdateUserDataAsync(int userId)
+        public async Task UpdateUserDataAsync(User user)
         {
-            throw new NotImplementedException();
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+        public async Task<User> GetUserFromBaseAsync(int id)
+        {
+            var userToBase = await _context.User.FindAsync(id);
+            return userToBase;
+        }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            return await _context.User.ToListAsync();
         }
     }
 }

@@ -3,7 +3,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using ESA_api.Helpers;
 using ESA_api.Mapping.DTO.CommonDTO.CloudUploadDTO;
-using ESA_api.Model;
+using ESA_api.Models;
 using ESA_api.Repositories.Common.CloudUploadRepository;
 using Microsoft.Extensions.Options;
 using System;
@@ -27,6 +27,7 @@ namespace ESA_api.Services.Common.CloudUploadService
            _repository = repository;
            _options = options;
            _mapper = mapper;
+            
 
             Account acc = new Account(
              _options.Value.CloudName,
@@ -35,24 +36,33 @@ namespace ESA_api.Services.Common.CloudUploadService
          );
 
             _cloudinary = new Cloudinary(acc);
+            
         }
 
         public async Task<CloudinaryAsset> AddCloudAssetAsync(CloudinaryAsset cloudinaryAsset, int id, int lessonId)
         {
             var file = cloudinaryAsset.File;
-            var uploadResult = new ImageUploadResult();
-
-            if (file.Length > 0)
+            var uploadResult = new VideoUploadResult();
+            try
             {
-                using (var stream = file.OpenReadStream())
+                if (file.Length > 0)
                 {
-                    var uploadParams = new ImageUploadParams()
+                    using (var stream = file.OpenReadStream())
                     {
-                        File = new FileDescription(file.Name, stream)
-                    };
+                        var uploadParams = new VideoUploadParams()
+                        {
+                            File = new FileDescription(file.Name, stream)
+                        };
 
-                    uploadResult = _cloudinary.Upload(uploadParams);
+                        uploadResult = _cloudinary.Upload(uploadParams);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                string errorMessage = $"Exception - MESSAGE: {e.Message} STACK TRACE: {e.StackTrace}";
+                // Exception logging code here
+
             }
             cloudinaryAsset.Url = uploadResult.Uri.ToString();
             cloudinaryAsset.PublicId = uploadResult.PublicId;
@@ -81,7 +91,7 @@ namespace ESA_api.Services.Common.CloudUploadService
             throw new NotImplementedException();
         }
 
-        public Task<CloudAssetDTO> GetCourseOwnerAddedMaterialsAsync(int userId)
+        public Task<List<CloudAssetDTO>> GetCourseOwnerAddedMaterialsAsync(int userId)
         {
             throw new NotImplementedException();
         }
