@@ -23,7 +23,7 @@ namespace ESA_api.Services.Education.CourseService
 
         public async Task<int> AddCourseAsync(CourseAddDTO courseAddDTO)
         {
-           
+
             var course = _mapper.Map<Course>(courseAddDTO);
             await _repository.AddCourseAsync(course);
             return course.Id;
@@ -90,6 +90,8 @@ namespace ESA_api.Services.Education.CourseService
 
         public async Task<List<CourseEnlistedDTO>> GetEnroledCoursesAsync(int userId)
         {
+            int rateCounter = 0;
+            int rateSum = 0;
             var user = await _repository.GetEnrolmentCoursesAsync(userId);
 
             List<Course> enlistedCourses = new List<Course>();
@@ -97,12 +99,31 @@ namespace ESA_api.Services.Education.CourseService
             {
                 enlistedCourses.Add(enrolment.Course);
             }
-
-            return _mapper.Map<List<CourseEnlistedDTO>>(enlistedCourses);
+            var mappedCourses = _mapper.Map<List<CourseEnlistedDTO>>(enlistedCourses);
+            foreach (var item in mappedCourses)
+            {
+                var result = await _repository.GetRateListByIdAsync(item.Id);
+                rateCounter = 0;
+                rateSum = 0;
+                foreach (var rate in result)
+                {
+                    rateSum += rate.Points;
+                    rateCounter++;
+                }
+                if (rateCounter > 0 && rateSum > 0)
+                {
+                    int rateAverage = rateSum / rateCounter;
+                    item.Rate = rateAverage;
+                }
+            }
+            return mappedCourses;
         }
 
         public async Task<List<CourseEnlistedDTO>> GetNoEnroledCoursesAsync(int userId)
         {
+            int rateCounter = 0;
+            int rateSum = 0;
+
             List<CourseEnlistedDTO> noEnroledCourses = new List<CourseEnlistedDTO>();
             var user = await _repository.GetEnrolmentCoursesAsync(userId);
 
@@ -118,23 +139,58 @@ namespace ESA_api.Services.Education.CourseService
 
             foreach (var course in mappedAllCourses)
             {
-                
-                    if (mappedenlisted.Any(courseExist => courseExist.Id == course.Id))
-                    {
-                    //return mappedenlisted;
-                    } else
-                    {
-                        noEnroledCourses.Add(course);
-                    }
-                
+
+                if (mappedenlisted.Any(courseExist => courseExist.Id == course.Id))
+                {
+                }
+                else
+                {
+                    noEnroledCourses.Add(course);
+                }
+
             }
-            return _mapper.Map<List<CourseEnlistedDTO>>(noEnroledCourses);
+            var mappedCourses = _mapper.Map<List<CourseEnlistedDTO>>(noEnroledCourses);
+
+            foreach (var item in mappedCourses)
+            {
+                var result = await _repository.GetRateListByIdAsync(item.Id);
+                rateCounter = 0;
+                rateSum = 0;
+                foreach (var rate in result)
+                {
+                    rateSum += rate.Points;
+                    rateCounter++;
+                }
+                if (rateCounter > 0 && rateSum > 0)
+                {
+                    int rateAverage = rateSum / rateCounter;
+                    item.Rate = rateAverage;
+                }
+            }
+            return mappedCourses;
+        }
+
+        public async Task<int> RateAsync(CourseRatingDTO ratingDTO)
+        {
+            var task = _mapper.Map<CourseRating>(ratingDTO);
+            if (await _repository.isRatedAlready(ratingDTO.CourseId, ratingDTO.UserId))
+            {
+                var actualRate = await _repository.GetActualRatingAsync(ratingDTO.CourseId, ratingDTO.UserId);
+                actualRate.Points = ratingDTO.Points;
+                await _repository.UpdateRatingAsync(actualRate);
+                return actualRate.Id;
+            }
+            else
+            {
+                await _repository.RateAsync(task);
+                return task.Id;
+            }
         }
 
         public async Task<int> UpdateCourseAsync(int courseId, CourseAddDTO courseAddDTO)
         {
             var courseFromDatabase = await _repository.GetCourseFromDatabaseAsync(courseId);
-            var courseToDatabase =  _mapper.Map(courseAddDTO, courseFromDatabase);
+            var courseToDatabase = _mapper.Map(courseAddDTO, courseFromDatabase);
 
             await _repository.UpdateCourseAsync(courseToDatabase);
             return courseToDatabase.Id;

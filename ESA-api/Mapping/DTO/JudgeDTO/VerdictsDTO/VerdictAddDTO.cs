@@ -8,6 +8,7 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO
     public class VerdictAddDTO
     {
         public string VerdictName { get; set; }
+        public string AlgorithmTaskName { get; set; }
         public int ElementaryOperation { get; set; }
         public decimal Time { get; set; }
         public int Memory { get; set; }

@@ -7,8 +7,8 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.AlgorithmTasksDTO
 {
     public class RatingDTO
     {
-        public int? Points { get; set; }
-        public int? UserId { get; set; }
-        public int? AlgorithmTaskId { get; set; }
+        public int Points { get; set; }
+        public int UserId { get; set; }
+        public int AlgorithmTaskId { get; set; }
     }
 }

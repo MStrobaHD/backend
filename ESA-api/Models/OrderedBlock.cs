@@ -9,6 +9,7 @@ namespace ESA_api.Models
         public string Content { get; set; }
         public int BlockPosition { get; set; }
         public int ExamId { get; set; }
+        public string Definition { get; set; }
 
         public virtual Exam Exam { get; set; }
     }

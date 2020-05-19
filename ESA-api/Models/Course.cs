@@ -7,6 +7,7 @@ namespace ESA_api.Models
     {
         public Course()
         {
+            CourseAssignment = new HashSet<CourseAssignment>();
             CourseEnrolment = new HashSet<CourseEnrolment>();
             CourseRating = new HashSet<CourseRating>();
             Exam = new HashSet<Exam>();
@@ -19,11 +20,13 @@ namespace ESA_api.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string CourseIconUrl { get; set; }
+        public int? IsCompleted { get; set; }
         public int CategoryId { get; set; }
         public int UserId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<CourseAssignment> CourseAssignment { get; set; }
         public virtual ICollection<CourseEnrolment> CourseEnrolment { get; set; }
         public virtual ICollection<CourseRating> CourseRating { get; set; }
         public virtual ICollection<Exam> Exam { get; set; }

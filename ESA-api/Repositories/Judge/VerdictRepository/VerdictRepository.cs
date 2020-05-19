@@ -63,5 +63,42 @@ namespace ESA_api.Repositories.Judge.VerdictRepository
         {
             return await _context.Verdict.AnyAsync(x => x.Id == verdictId);
         }
+
+        public async Task AddMetricsAsync(Metrics metrics)
+        {
+            _context.Metrics.Add(metrics);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Verdict>> GetVerdictWithMetricsByTaskId(int taskId)
+        {
+            return await _context.Verdict
+                .Include(metrics => metrics.Metrics)
+                .Where(verdict => verdict.AlgorithmTaskId == taskId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task AddCopySolutionAsync(CopiedSolution copiedSolution)
+        {
+            _context.CopiedSolution.Add(copiedSolution);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<CopiedSolution>> GetCopiedSolutionListAsync(int verdictId)
+        {
+            return await _context.CopiedSolution.Where(solution => solution.VerdictId == verdictId)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<Verdict> GetVerdictWithMetricsAsync(int verdictId)
+        {
+            return await _context.Verdict
+               .Include(metrics => metrics.Metrics)
+               .Where(verdict => verdict.Id == verdictId)
+               .AsNoTracking()
+               .SingleOrDefaultAsync();
+        }
     }
 }

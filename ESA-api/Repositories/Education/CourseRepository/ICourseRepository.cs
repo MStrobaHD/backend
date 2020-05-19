@@ -23,5 +23,10 @@ namespace ESA_api.Repositories.Education.CourseRepository
         Task<bool> FindCourseAsync(int courseId);
         Task<bool> CourseExistsAsync(int courseId);
         Task<Course> GetCourseFromDatabaseAsync(int courseId);
+        Task RateAsync(CourseRating rating);
+        Task<List<CourseRating>> GetRateListByIdAsync(int id);
+        Task<bool> isRatedAlready(int? courseId, int? userId);
+        Task UpdateRatingAsync(CourseRating task);
+        Task<CourseRating> GetActualRatingAsync(int courseId, int userId);
     }
 }

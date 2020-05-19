@@ -54,12 +54,14 @@ namespace ESA_api.Repositories.Education.LessonRepository
                 .Where(courseLessons => courseLessons.CourseId == courseId)
                 .Include(cloud => cloud.CloudAsset)
                 .Include(external => external.ServerAsset)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Lesson> GetLessonAsync(int lessonId)
         {
-            return await _context.Lesson.Where(lesson => lesson.Id == lessonId).SingleOrDefaultAsync();
+            return await _context.Lesson.Where(lesson => lesson.Id == lessonId)
+                .AsNoTracking().SingleOrDefaultAsync();
         }
 
         public async Task<Lesson> GetLessonFromDatabaseAsync(int lessonId)
@@ -69,7 +71,8 @@ namespace ESA_api.Repositories.Education.LessonRepository
 
         public async Task<List<Lesson>> GetLessonsAsync()
         {
-            return await _context.Lesson.ToListAsync();
+            return await _context.Lesson
+                .AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> LessonExistsAsync(int lessonId)

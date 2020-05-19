@@ -22,9 +22,18 @@ namespace ESA_api.Repositories.Education.ExamResultRepository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<ExamResult>> GetExamResultAllAsync()
+        {
+            return await _context.ExamResult
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
         public async Task<List<ExamResult>> GetExamResultsAsync(int userId)
         {
-            return await _context.ExamResult.Where(exam => exam.UserId == userId).ToListAsync();
+            return await _context.ExamResult.Where(exam => exam.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

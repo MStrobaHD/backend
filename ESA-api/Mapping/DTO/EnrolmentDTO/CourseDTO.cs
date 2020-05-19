@@ -12,5 +12,6 @@ namespace ESA_api.Mapping.DTO.EnrolmentDTO
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string CourseIconUrl { get; set; }
+        public int Rate { get; set; }
     }
 }

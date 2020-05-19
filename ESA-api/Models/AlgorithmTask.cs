@@ -8,6 +8,8 @@ namespace ESA_api.Models
         public AlgorithmTask()
         {
             Rating = new HashSet<Rating>();
+            TaskAssignment = new HashSet<TaskAssignment>();
+            TaskToGroupAssignment = new HashSet<TaskToGroupAssignment>();
             Verdict = new HashSet<Verdict>();
             VerificationData = new HashSet<VerificationData>();
         }
@@ -31,6 +33,8 @@ namespace ESA_api.Models
         public virtual Level Level { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Rating> Rating { get; set; }
+        public virtual ICollection<TaskAssignment> TaskAssignment { get; set; }
+        public virtual ICollection<TaskToGroupAssignment> TaskToGroupAssignment { get; set; }
         public virtual ICollection<Verdict> Verdict { get; set; }
         public virtual ICollection<VerificationData> VerificationData { get; set; }
     }

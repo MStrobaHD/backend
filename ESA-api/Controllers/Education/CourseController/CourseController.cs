@@ -54,7 +54,7 @@ namespace ESA_api.Controllers.Education.CourseController
         }
 
         // GET: api/Course/User/Id
-        [HttpGet("User/{id}")]
+        [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetCoursesCreatedByUserAsync(int userId)
         {
             if (!ModelState.IsValid)
@@ -223,6 +223,17 @@ namespace ESA_api.Controllers.Education.CourseController
             await _service.DeleteEnrolmentAsync(userId, courseId);
 
             return NoContent();
+        }
+        [HttpPost("rating")]
+        public async Task<IActionResult> RateAsync([FromBody] CourseRatingDTO ratingDTO)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.RateAsync(ratingDTO);
+            return Ok(result);
         }
     }
 }

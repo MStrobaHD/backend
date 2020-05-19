@@ -43,7 +43,10 @@ namespace ESA_api.Repositories.Education.FlashcardSerRepository
 
         public async Task<FlashcardSet> GetFlashcardSetAsync(int flashcardSetId)
         {
-            return await _context.FlashcardSet.Where(set => set.Id == flashcardSetId).SingleOrDefaultAsync();
+            return await _context.FlashcardSet
+                .Where(set => set.Id == flashcardSetId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<FlashcardSet> GetFlashcardSetFromDatabaseAsync(int flashcardSetId)
@@ -53,12 +56,17 @@ namespace ESA_api.Repositories.Education.FlashcardSerRepository
 
         public async Task<List<FlashcardSet>> GetFlashcardSetsAsync()
         {
-            return await _context.FlashcardSet.ToListAsync();
+            return await _context.FlashcardSet
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<FlashcardSet>> GetFlashcardSetsOfCourseAsync(int courseId)
         {
-            return await _context.FlashcardSet.Where(set=> set.CourseId == courseId).ToListAsync();
+            return await _context.FlashcardSet
+                .Where(set=> set.CourseId == courseId)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task UpdateFlashcardSetAsync(FlashcardSet flashcardSet)

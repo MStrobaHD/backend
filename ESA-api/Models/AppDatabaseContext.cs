@@ -22,7 +22,9 @@ namespace ESA_api.Models
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CloudAsset> CloudAsset { get; set; }
         public virtual DbSet<Complexity> Complexity { get; set; }
+        public virtual DbSet<CopiedSolution> CopiedSolution { get; set; }
         public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<CourseAssignment> CourseAssignment { get; set; }
         public virtual DbSet<CourseEnrolment> CourseEnrolment { get; set; }
         public virtual DbSet<CourseRating> CourseRating { get; set; }
         public virtual DbSet<Exam> Exam { get; set; }
@@ -31,18 +33,23 @@ namespace ESA_api.Models
         public virtual DbSet<Flashcard> Flashcard { get; set; }
         public virtual DbSet<FlashcardSet> FlashcardSet { get; set; }
         public virtual DbSet<FlashcardSkill> FlashcardSkill { get; set; }
+        public virtual DbSet<Group> Group { get; set; }
+        public virtual DbSet<GroupAssignment> GroupAssignment { get; set; }
+        public virtual DbSet<HomeworkDone> HomeworkDone { get; set; }
         public virtual DbSet<Lesson> Lesson { get; set; }
         public virtual DbSet<Level> Level { get; set; }
+        public virtual DbSet<Metrics> Metrics { get; set; }
         public virtual DbSet<MultiSelectQuestion> MultiSelectQuestion { get; set; }
         public virtual DbSet<OrderedBlock> OrderedBlock { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<ServerAsset> ServerAsset { get; set; }
+        public virtual DbSet<TaskAssignment> TaskAssignment { get; set; }
+        public virtual DbSet<TaskToGroupAssignment> TaskToGroupAssignment { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Verdict> Verdict { get; set; }
         public virtual DbSet<VerificationData> VerificationData { get; set; }
 
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -188,6 +195,16 @@ namespace ESA_api.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<CopiedSolution>(entity =>
+            {
+                
+
+                entity.HasOne(d => d.Verdict)
+                    .WithMany(p => p.CopiedSolution)
+                    .HasForeignKey(d => d.VerdictId)
+                    .HasConstraintName("FK_COPIEDSO_REFERENCE_VERDICT");
+            });
+
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.Property(e => e.CourseIconUrl)
@@ -217,6 +234,19 @@ namespace ESA_api.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_COURSE_REFERENCE_USER");
+            });
+
+            modelBuilder.Entity<CourseAssignment>(entity =>
+            {
+                entity.HasOne(d => d.Course)
+                    .WithMany(p => p.CourseAssignment)
+                    .HasForeignKey(d => d.CourseId)
+                    .HasConstraintName("FK_COURSEAS_REFERENCE_COURSE");
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.CourseAssignment)
+                    .HasForeignKey(d => d.GroupId)
+                    .HasConstraintName("FK_COURSEAS_REFERENCE_GROUP");
             });
 
             modelBuilder.Entity<CourseEnrolment>(entity =>
@@ -270,6 +300,10 @@ namespace ESA_api.Models
 
             modelBuilder.Entity<ExamResult>(entity =>
             {
+                entity.Property(e => e.ExamName)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Mark)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -363,6 +397,35 @@ namespace ESA_api.Models
                     .HasConstraintName("FK_FLASHCAR_FLASHCARD_FLASHCAR");
             });
 
+            modelBuilder.Entity<Group>(entity =>
+            {
+                entity.Property(e => e.GroupName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GroupType)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.Group)
+                    .HasForeignKey(d => d.TeacherId)
+                    .HasConstraintName("FK_GROUP_REFERENCE_USER");
+            });
+
+            modelBuilder.Entity<GroupAssignment>(entity =>
+            {
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.GroupAssignment)
+                    .HasForeignKey(d => d.GroupId)
+                    .HasConstraintName("FK_GROUPASS_REFERENCE_GROUP");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.GroupAssignment)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_GROUPASS_REFERENCE_USER");
+            });
+
             modelBuilder.Entity<Lesson>(entity =>
             {
                 entity.Property(e => e.LessonTitle)
@@ -383,6 +446,33 @@ namespace ESA_api.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Metrics>(entity =>
+            {
+                entity.Property(e => e.HalsteadProgramLenght).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.HalsteadVocabulary).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.InteligenceContent).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.LanguageLevel).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ProgramDifficulty).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ProgramLevel).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ProgramVolume).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ProgrammingEffort).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.ProgrammingTime).HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Verdict)
+                    .WithMany(p => p.Metrics)
+                    .HasForeignKey(d => d.VerdictId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_METRICS_REFERENCE_VERDICT");
             });
 
             modelBuilder.Entity<MultiSelectQuestion>(entity =>
@@ -430,7 +520,9 @@ namespace ESA_api.Models
                     .IsRequired()
                     .HasColumnType("text");
 
-             
+                //entity.Property(e => e.Definition)
+                //    .IsRequired()
+                //    .HasColumnType("text");
 
                 entity.HasOne(d => d.Exam)
                     .WithMany(p => p.OrderedBlock)
@@ -495,6 +587,38 @@ namespace ESA_api.Models
                     .HasConstraintName("FK_SERVERAS_REFERENCE_USER");
             });
 
+            modelBuilder.Entity<TaskAssignment>(entity =>
+            {
+                entity.Property(e => e.EndDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StartDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TimeToSolveTask).HasColumnType("datetime");
+
+                entity.HasOne(d => d.AlgorithmTask)
+                    .WithMany(p => p.TaskAssignment)
+                    .HasForeignKey(d => d.AlgorithmTaskId)
+                    .HasConstraintName("FK_TASKASSI_REFERENCE_ALGORITH");
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.TaskAssignment)
+                    .HasForeignKey(d => d.StudentId)
+                    .HasConstraintName("FK_TASKASSI_REFERENCE_USER");
+            });
+
+            modelBuilder.Entity<TaskToGroupAssignment>(entity =>
+            {
+                entity.HasOne(d => d.AlgorithmTask)
+                    .WithMany(p => p.TaskToGroupAssignment)
+                    .HasForeignKey(d => d.AlgorithmTaskId)
+                    .HasConstraintName("FK_TASKTOGR_REFERENCE_ALGORITH");
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.TaskToGroupAssignment)
+                    .HasForeignKey(d => d.GroupId)
+                    .HasConstraintName("FK_TASKTOGR_REFERENCE_GROUP");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.AccountCreationDate).HasColumnType("datetime");
@@ -502,6 +626,14 @@ namespace ESA_api.Models
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Firstname)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Lastname)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PasswordHash)
@@ -525,7 +657,11 @@ namespace ESA_api.Models
 
             modelBuilder.Entity<Verdict>(entity =>
             {
+                entity.Property(e => e.Memory).HasColumnType("decimal(18, 0)");
+
                 entity.Property(e => e.Solution).HasColumnType("text");
+
+                entity.Property(e => e.Time).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.VerdictName)
                     .IsRequired()

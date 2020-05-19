@@ -10,5 +10,6 @@ namespace ESA_api.Repositories.Education.ExamResultRepository
     {
         Task AddResultAsync(ExamResult  examResult);
         Task<List<ExamResult>> GetExamResultsAsync(int userId);
+        Task<List<ExamResult>> GetExamResultAllAsync();
     }
 }

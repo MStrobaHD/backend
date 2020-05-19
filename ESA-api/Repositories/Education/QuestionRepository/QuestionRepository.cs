@@ -78,7 +78,10 @@ namespace ESA_api.Repositories.Education.QuestionRepository
 
         public async Task<MultiSelectQuestion> GetMultiSelectQuestionAsync(int multiSelectQuestionId)
         {
-            return await _context.MultiSelectQuestion.Where(multiSelectQuestion => multiSelectQuestion.Id == multiSelectQuestionId).SingleOrDefaultAsync();
+            return await _context.MultiSelectQuestion
+                .Where(multiSelectQuestion => multiSelectQuestion.Id == multiSelectQuestionId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<MultiSelectQuestion> GetMultiSelectQuestionFromDatabaseAsync(int multiSelectQuestionId)
@@ -88,19 +91,25 @@ namespace ESA_api.Repositories.Education.QuestionRepository
 
         public async Task<List<MultiSelectQuestion>> GetMultiSelectQuestionsAsync()
         {
-            return await _context.MultiSelectQuestion.ToListAsync();
+            return await _context.MultiSelectQuestion
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<MultiSelectQuestion>> GetMultiSelectQuestionsFromExamAsync(int examId)
         {
             return await _context.MultiSelectQuestion
                 .Where(question => question.ExamId==examId)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<OrderedBlock> GetOrderedBlockAsync(int orderedBlockId)
         {
-            return await _context.OrderedBlock.Where(orderedBlock => orderedBlock.Id == orderedBlockId).SingleOrDefaultAsync();
+            return await _context.OrderedBlock
+                .Where(orderedBlock => orderedBlock.Id == orderedBlockId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<OrderedBlock> GetOrderedBlockFromDatabaseAsync(int orderedBlockId)
@@ -110,19 +119,25 @@ namespace ESA_api.Repositories.Education.QuestionRepository
 
         public async Task<List<OrderedBlock>> GetOrderedBlocksAsync()
         {
-            return await _context.OrderedBlock.ToListAsync();
+            return await _context.OrderedBlock
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<OrderedBlock>> GetOrderedBlocksFromExamAsync(int examId)
         {
             return await _context.OrderedBlock
                 .Where(question => question.ExamId == examId)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Question> GetQuestionAsync(int questionId)
         {
-            return await _context.Question.Where(question => question.Id == questionId).SingleOrDefaultAsync();
+            return await _context.Question
+                .Where(question => question.Id == questionId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<Question> GetQuestionFromDatabaseAsync(int questionId)
@@ -132,13 +147,16 @@ namespace ESA_api.Repositories.Education.QuestionRepository
 
         public async Task<List<Question>> GetQuestionsAsync()
         {
-            return await _context.Question.ToListAsync();
+            return await _context.Question
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<Question>> GetQuestionsFromExamAsync(int examId)
         {
             return await _context.Question
                .Where(question => question.ExamId == examId)
+               .AsNoTracking()
                .ToListAsync();
         }
 

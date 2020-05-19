@@ -6,6 +6,7 @@ using AutoMapper;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
 using ESA_api.Models;
 using ESA_api.Repositories.Education.ExamRepository;
+using ESA_api.Repositories.Education.ExamResultRepository;
 
 namespace ESA_api.Services.Education.ExamService
 {
@@ -13,11 +14,13 @@ namespace ESA_api.Services.Education.ExamService
     {
         private readonly IExamRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IExamResultRepository _examResultRepository;
 
-        public ExamService(IExamRepository repository, IMapper mapper)
+        public ExamService(IExamRepository repository, IMapper mapper, IExamResultRepository examResultRepository)
         {
             _repository = repository;
             _mapper = mapper;
+            _examResultRepository = examResultRepository;
         }
 
         public async Task<int> AddExamAsync(ExamAddDTO examAddDTO)
@@ -39,9 +42,28 @@ namespace ESA_api.Services.Education.ExamService
             return false;
         }
 
+        public async Task<List<ExamListDTO>> GetAvailableExamsAsync(int courseId, int userId)
+        {
+            var exams = await _repository.GetCourseExamsAsync(courseId);
+            var results = await _examResultRepository.GetExamResultsAsync(userId);
+            foreach (var item in exams.ToList())
+            {
+                foreach (var result in results)
+                {
+                    if (item.Id == result.ExamId)
+                    {
+                        exams.Remove(item);
+                        break;
+                    }
+                }
+            }
+            return _mapper.Map<List<ExamListDTO>>(exams);
+        }
+
         public async Task<List<ExamListDTO>> GetCourseExamsAsync(int courseId)
         {
             var exams = await _repository.GetCourseExamsAsync(courseId);
+           
             return _mapper.Map<List<ExamListDTO>>(exams);
         }
 
@@ -56,12 +78,6 @@ namespace ESA_api.Services.Education.ExamService
             var exams = await _repository.GetExamsAsync();
             return _mapper.Map<List<ExamListDTO>>(exams);
         }
-
-        //public async Task<List<ExamListDTO>> GetExamsByTypeAsync(int examTypeId)
-        //{
-        //    var exams = await _repository.GetExamsByTypeAsync(examTypeId);
-        //    return _mapper.Map<List<ExamListDTO>>(exams);
-        //}
 
         public async Task<int> UpdateExamAsync(int examId, ExamAddDTO examAddDTO)
         {

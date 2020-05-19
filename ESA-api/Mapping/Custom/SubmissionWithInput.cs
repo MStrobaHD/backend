@@ -9,6 +9,7 @@ namespace ESA_api.Mapping.Custom
     {
         public string source_code { get; set; }
         public int language_id { get; set; }
+        public string algorithmTaskName { get; set; }
         public string stdin { get; set; }
         public int userId { get; set; }
         public int algorithmTaskId { get; set; }

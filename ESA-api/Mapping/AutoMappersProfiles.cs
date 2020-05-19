@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using ESA_api.Mapping.DTO;
+using ESA_api.Mapping.DTO.CommonDTO.BadgesDTO;
 using ESA_api.Mapping.DTO.CommonDTO.CategoryDTO;
+using ESA_api.Mapping.DTO.CommonDTO.ExperienceDTO;
 using ESA_api.Mapping.DTO.EducationDTO.CoursesDTO;
 using ESA_api.Mapping.DTO.EducationDTO.ExamResultDTO;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.FlashcardsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.FlashcardSetsDTO;
+using ESA_api.Mapping.DTO.EducationDTO.GroupsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.LessonsDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO;
 using ESA_api.Mapping.DTO.EducationDTO.QuestionDTO.MultiSelectQuestionDTO;
@@ -20,6 +23,7 @@ using ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO;
 using ESA_api.Mapping.DTO.JudgeDTO.VerificationDatasDTO;
 using ESA_api.Mapping.DTO.UserProfileDTO;
 using ESA_api.Models;
+using ESA_api.Services.Judge.CodeAnalyzeService.CodeAnalyzeModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +65,7 @@ namespace ESA_api.Mapping
             CreateMap<UserEnlistedDTO, User>().ReverseMap();
             CreateMap<CourseEnrolmentEnlistedDTO, CourseEnrolment>().ReverseMap();
             CreateMap<CourseEnlistedDTO, Course>().ReverseMap();
+            CreateMap<CourseRatingDTO, CourseRating>().ReverseMap();
             CreateMap<RatingDTO, Rating>().ReverseMap();
 
             // Exam mapping
@@ -95,6 +100,24 @@ namespace ESA_api.Mapping
             CreateMap<OrderedBlockListDTO, OrderedBlock>().ReverseMap();
             // Verdict DTO
             CreateMap<VerdictDTO, Verdict>().ReverseMap();
+            CreateMap<VerdictWithMetrics, Verdict>().ReverseMap();
+            CreateMap<MetricsAddDTO, Metrics>().ReverseMap();
+            CreateMap<ExperienceAddDTO, Experience>().ReverseMap();
+            CreateMap<BadgeAddDTO, Badge>().ReverseMap();
+            CreateMap<BadgeDTO, Badge>().ReverseMap();
+            CreateMap<Metrics, MetricsSheet>().ReverseMap();
+
+            // Group
+            CreateMap<CourseAssignmentAddDTO, CourseAssignment>().ReverseMap();
+            CreateMap<GroupAssignmentAddDTO, GroupAssignment>().ReverseMap();
+            CreateMap<TaskToGroupAssignmentAddDTO, TaskToGroupAssignment>().ReverseMap();
+            CreateMap<CourseAssignmentAddDTO, CourseAssignment>().ReverseMap();
+            CreateMap<GroupAssignmentAddDTO, GroupAssignment>().ReverseMap();
+            CreateMap<TaskToGroupAssignmentAddDTO, TaskToGroupAssignment>().ReverseMap();
+            CreateMap<GroupDTO, Group>().ReverseMap();
+            CreateMap<GroupAddDTO, Group>().ReverseMap();
+            CreateMap<CopiedSolutionDTO, CopiedSolution>().ReverseMap();
+
         }
     }
 }

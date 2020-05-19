@@ -15,6 +15,7 @@ namespace ESA_api.Models
         public string LessonTitle { get; set; }
         public int CourseId { get; set; }
         public int? Priority { get; set; }
+        public int? IsComplete { get; set; }
 
         public virtual Course Course { get; set; }
         public virtual ICollection<CloudAsset> CloudAsset { get; set; }

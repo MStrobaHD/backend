@@ -9,6 +9,7 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO
     {
         public int Id { get; set; }
         public string VerdictName { get; set; }
+        public string AlgorithmTaskName { get; set; }
         public int ElementaryOperation { get; set; }
         public decimal Time { get; set; }
         public decimal Memory { get; set; }
@@ -18,6 +19,8 @@ namespace ESA_api.Mapping.DTO.JudgeDTO.VerdictsDTO
         public int CyclomaticComplexity { get; set; }
         public int NumberOfDecision { get; set; }
         public int NumberOfAssignment { get; set; }
+        public int? IsCopied { get; set; }
+        public int? SimilarTaskId { get; set; }
         public int UserId { get; set; }
         public int AlgorithmTaskId { get; set; }
     }

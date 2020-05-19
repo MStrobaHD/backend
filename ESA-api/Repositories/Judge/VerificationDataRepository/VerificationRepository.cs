@@ -40,6 +40,7 @@ namespace ESA_api.Repositories.Judge.VerificationDataRepository
         {
             return await _context.VerificationData
                 .Where(verificationData => verificationData.Id == verificationDataId)
+                .AsNoTracking()
                 .SingleOrDefaultAsync();
         }
 
@@ -50,7 +51,9 @@ namespace ESA_api.Repositories.Judge.VerificationDataRepository
 
         public async Task<List<VerificationData>> GetVerificationDatasAsync()
         {
-            return await _context.VerificationData.ToListAsync();
+            return await _context.VerificationData
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task UpdateVerificationDataAsync(VerificationData verificationData)

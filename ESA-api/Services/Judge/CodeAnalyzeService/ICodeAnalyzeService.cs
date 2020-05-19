@@ -10,6 +10,6 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
     {
         List<MethodNode> CreateControlFlowGraph(string code);
         List<CFG> CreateControlFlowGraphForDisplay(string code);
-        Metrics GetMetricsAsync(string code);
+        MetricsSheet GetMetricsAsync(string code);
     }
 }

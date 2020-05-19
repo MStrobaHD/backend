@@ -50,38 +50,49 @@ namespace ESA_api.Services.Judge.AlgorithmTaskService
 
         public async Task<List<AlgorithmTaskListForDisplayDTO>> GetAlgorithmTasksForDisplayAsync()
         {
-            //var task = await _repository.GetRateListByIdAsync(task);
-            AlgorithmTaskListForDisplayDTO listItem = new AlgorithmTaskListForDisplayDTO();
             int rateCounter = 0;
             int rateSum = 0;
-             var tasks = await _repository.GetAlgorithmTasksForDisplayAsync();
+            var tasks = await _repository.GetAlgorithmTasksForDisplayAsync();
 
-           var mappedTask =  _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(tasks);
+            var mappedTask = _mapper.Map<List<AlgorithmTaskListForDisplayDTO>>(tasks);
+            
 
             foreach (var item in mappedTask)
             {
                 var result = await _repository.GetRateListByIdAsync(item.Id);
+                rateCounter = 0;
+                rateSum = 0;
                 foreach (var rate in result)
                 {
                     rateSum += rate.Points;
                     rateCounter++;
                 }
-                if (rateCounter > 0 && rateSum >0)
+                if (rateCounter > 0 && rateSum > 0)
                 {
                     int rateAverage = rateSum / rateCounter;
                     item.RatePoints = rateAverage;
                 }
-               
-                
+
+
             }
             return mappedTask;
-        }       
+        }
 
         public async Task<int> RateAsync(RatingDTO ratingDTO)
         {
             var task = _mapper.Map<Rating>(ratingDTO);
-            await _repository.RateAsync(task);
-            return task.Id;
+            if (await _repository.isRatedAlready(ratingDTO.AlgorithmTaskId, ratingDTO.UserId))
+            {
+                var actualRate = await _repository.GetActualRatingAsync(ratingDTO.AlgorithmTaskId, ratingDTO.UserId);
+                actualRate.Points = ratingDTO.Points;
+                await _repository.UpdateRatingAsync(actualRate);
+                return actualRate.Id;
+            } else
+            {
+                await _repository.RateAsync(task);
+                return task.Id;
+            }
+           
         }
     }
 }

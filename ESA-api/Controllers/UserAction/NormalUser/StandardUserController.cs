@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ESA_api.Mapping.DTO.UserProfileDTO;
+using ESA_api.Models;
 using ESA_api.Services.Common.CloudUploadService;
 using ESA_api.Services.UserAction;
 using Microsoft.AspNetCore.Http;
@@ -70,6 +71,44 @@ namespace ESA_api.Controllers.UserAction
             }
             catch (DbUpdateConcurrencyException)
             {}
+            return Ok();
+        }
+        [HttpPut("role")]
+        public async Task<IActionResult> UpdateUserRoleAsync(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            try
+            {
+                var result = await _service.UpdateUserRoleAsync(user);
+            }
+            catch (DbUpdateConcurrencyException)
+            { }
+            return Ok();
+        }
+        [HttpPut("grouprole")]
+        public async Task<IActionResult> UpdateUserGroupRoleAsync(List<User> users)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (users == null)
+            {
+                throw new ArgumentNullException(nameof(users));
+            }
+            try
+            {
+                var result = await _service.UpdateUserGroupRoleAsync(users);
+            }
+            catch (DbUpdateConcurrencyException)
+            { }
             return Ok();
         }
     }

@@ -30,6 +30,30 @@ namespace ESA_api.Controllers.Judgement.VerdictController
             var result = await _service.AddVerdictAsync(verdictAddDTO);
             return Ok(result);
         }
+        [HttpGet("update/")]
+        public async Task<IActionResult> AssignCoursesToGroupAsync(int verdictId, string verdictName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await _service.UpdateVerdictAsync(verdictId, verdictName);
+            return Ok();
+        }
+        [HttpGet("actual/{verdictId}")]
+        public async Task<IActionResult> GetCopiedSolutionAsync(int verdictId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetVerdictAsync(verdictId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserVerdictsAsync(int userId)
         {
@@ -53,6 +77,21 @@ namespace ESA_api.Controllers.Judgement.VerdictController
                 return BadRequest(ModelState);
             }
             var result = await _service.GetVerdictAsync(verdictId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
+        [HttpGet("withMetrics/{verdictId}")]
+        public async Task<IActionResult> GetVerdictWithMetricsAsync(int verdictId)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetVerdictWithMetricsAsync(verdictId);
             if (result == null)
             {
                 return NotFound();

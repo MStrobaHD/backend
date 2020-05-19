@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ESA_api.Mapping.DTO.EducationDTO.ExamsDTO;
 using ESA_api.Services.Education.ExamService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESA_api.Controllers.Education.ExamController
@@ -19,7 +15,6 @@ namespace ESA_api.Controllers.Education.ExamController
         {
             _service = service;
         }
-        // GET: api/Course
         [HttpGet]
         public async Task<IActionResult> GetExamsAsync()
         {
@@ -34,8 +29,6 @@ namespace ESA_api.Controllers.Education.ExamController
             }
             return Ok(result);
         }
-
-        // GET: api/Course/5
         [HttpGet("{examId}")]
         public async Task<IActionResult> GetExamAsync(int examId)
         {
@@ -50,8 +43,6 @@ namespace ESA_api.Controllers.Education.ExamController
             }
             return Ok(result);
         }
-
-        // GET: api/Course/User/Id
         [HttpGet("Course/{courseId}")]
         public async Task<IActionResult> GetCourseExamsAsync(int courseId)
         {
@@ -67,26 +58,21 @@ namespace ESA_api.Controllers.Education.ExamController
             return Ok(result);
         }
 
-        //// GET: api/Course/Category/Id
-        //[HttpGet("ExamType/{examTypeId}")]
-        //public async Task<IActionResult> GetExamsByTypeAsync(int examTypeId)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpGet("Course/NotOpened/")]
+        public async Task<IActionResult> GetExamsNotOpenedAsync(int courseId, int userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _service.GetAvailableExamsAsync(courseId, userId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
 
-        //    var result = await _service.GetExamsByTypeAsync(examTypeId);
-
-        //    if (result == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(result);
-        //}
-
-        // POST: api/Course
         [HttpPost]
         public async Task<IActionResult> AddExamAsync([FromBody] ExamAddDTO examAddDTO)
         {
@@ -97,8 +83,5 @@ namespace ESA_api.Controllers.Education.ExamController
             var result = await _service.AddExamAsync(examAddDTO);
             return Ok(result);
         }
-
-        // PUT: api/Course/5
-       
     }
 }

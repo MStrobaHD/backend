@@ -64,7 +64,9 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
                 .Include(user => user.User)
                 .Include(complexity => complexity.Complexity)
                 .Include(algorithmCategory => algorithmCategory.AlgorithmCategory)
-                .Include(level => level.Level).ToListAsync();
+                .Include(level => level.Level)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<AlgorithmTask> GetAlgorithmTasksForSolveAsync(int algorithmTaskId)
@@ -75,23 +77,47 @@ namespace ESA_api.Repositories.Judge.AlgorithmTaskRepository
                 .Include(complexity => complexity.Complexity)
                 .Include(algorithmCategory => algorithmCategory.AlgorithmCategory)
                 .Include(level => level.Level)
-                .Include(data => data.VerificationData).SingleOrDefaultAsync();
+                .Include(data => data.VerificationData)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
+
+        public async Task<Rating> GetActualRatingAsync(int algorithmTaskId, int userId)
+        {
+            return await _context.Rating.Where(exp => exp.AlgorithmTaskId == algorithmTaskId && exp.UserId == userId).SingleOrDefaultAsync();
+        }   
 
         public async Task<List<Rating>> GetRateListByIdAsync(int id)
         {
-            return await _context.Rating.Where(rate => rate.AlgorithmTaskId == id).ToListAsync();
+            return await _context.Rating.Where(rate => rate.AlgorithmTaskId == id)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<bool> isRatedAlready(int? algorithmTaskId, int? userId)
+        {
+            var rating = await _context.Rating.Where(exp => exp.AlgorithmTaskId == algorithmTaskId && exp.UserId == userId).SingleOrDefaultAsync();
+
+            if (rating != null)
+                return true;
+            return false;
         }
 
         public async Task RateAsync(Rating rating)
         {
             _context.Rating.Add(rating);
-            await _context.SaveChangesAsync(); ;
+            await _context.SaveChangesAsync(); 
         }
 
         public async Task UpdateAlgorithmTaskAsync(AlgorithmTask algorithmTask)
         {
             _context.Entry(algorithmTask).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateRatingAsync(Rating task)
+        {
+            _context.Entry(task).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
     }

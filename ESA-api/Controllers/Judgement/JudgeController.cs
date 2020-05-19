@@ -25,7 +25,20 @@ namespace ESA_api.Controllers.Judgement
             _codeAnalyzeService = codeAnalyzeService;
             _judgeEngineService = judgeEngineService;
         }
-
+        [HttpGet("copies/{verdictId}")]
+        public async Task<IActionResult> GetCopiedSolutionAsync(int verdictId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _judgeEngineService.GetCopiedSolutionAsync(verdictId);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+        }
         [HttpPost("controlFlowGraph")]
         public async Task<IActionResult> GetControlFlowGraphAsync([FromBody] Source source)
         {

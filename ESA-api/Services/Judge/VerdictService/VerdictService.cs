@@ -20,6 +20,13 @@ namespace ESA_api.Services.Judge.VerdictService
             _mapper = mapper;
         }
 
+        public async Task<int> AddMetricsAsync(Metrics metrics)
+        {
+            //var metrics = _mapper.Map<Metrics>(metricsAddDTO);
+            await _repository.AddMetricsAsync(metrics);
+            return metrics.Id;
+        }
+
         public async Task<int> AddVerdictAsync(VerdictAddDTO verdictAddDTO)
         {
             var verdict = _mapper.Map<Verdict>(verdictAddDTO);
@@ -37,6 +44,19 @@ namespace ESA_api.Services.Judge.VerdictService
         {
             var verdicts = await _repository.GetVerdictAsync(verdictId);
             return _mapper.Map<VerdictDTO>(verdicts);
+        }
+
+        public async Task<VerdictWithMetrics> GetVerdictWithMetricsAsync(int verdictId)
+        {
+            var verdicts = await _repository.GetVerdictWithMetricsAsync(verdictId);
+            return _mapper.Map<VerdictWithMetrics>(verdicts);
+        }
+
+        public async Task UpdateVerdictAsync(int verdictId, string verdictName)
+        {
+            var verdictFromDB = await _repository.GetVerdictAsync(verdictId);
+            verdictFromDB.VerdictName = verdictName;
+            await _repository.UpdateVerdictAsync(verdictFromDB);
         }
     }
 }

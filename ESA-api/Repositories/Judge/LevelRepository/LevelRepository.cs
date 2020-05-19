@@ -40,6 +40,7 @@ namespace ESA_api.Repositories.Judge.LevelRepository
         {
             return await _context.Level
                 .Where(level => level.Id == levelId)
+                .AsNoTracking()
                 .SingleOrDefaultAsync();
         }
 
@@ -50,7 +51,9 @@ namespace ESA_api.Repositories.Judge.LevelRepository
 
         public async Task<List<Level>> GetLevelsAsync()
         {
-            return await _context.Level.ToListAsync();
+            return await _context.Level
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<bool> LevelExistsAsync(int levelId)

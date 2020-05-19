@@ -10,7 +10,6 @@ namespace ESA_api.Repositories.Education.FlashcardRepository
     public class FlashcardRepository : IFlashcardRepository
     {
         private readonly AppDatabaseContext _context;
-
         public FlashcardRepository(AppDatabaseContext context)
         {
             _context = context;
@@ -25,7 +24,6 @@ namespace ESA_api.Repositories.Education.FlashcardRepository
         public async Task DeleteFlashcardAsync(int flashcardId)
         {
             var flashcard = await _context.Flashcard.FindAsync(flashcardId);
-
             _context.Flashcard.Remove(flashcard);
             await _context.SaveChangesAsync();
         }
@@ -42,9 +40,11 @@ namespace ESA_api.Repositories.Education.FlashcardRepository
             return await _context.FlashcardSet.Include(flash => flash.Flashcard).Where(flashcard => flashcard.Id == id).FirstOrDefaultAsync();
         }
 
+
         public async Task<List<Flashcard>> GetSetFlashcardsListAsync(int setId)
         {
-            return await _context.Flashcard.Where(flashcard => flashcard.FlashcardSetId == setId).ToListAsync();
+            return await _context.Flashcard.Where(flashcard => flashcard.FlashcardSetId == setId)
+                .AsNoTracking().ToListAsync();
         }
     }
 }

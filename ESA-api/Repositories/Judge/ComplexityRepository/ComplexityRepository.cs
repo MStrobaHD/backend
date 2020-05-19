@@ -45,6 +45,7 @@ namespace ESA_api.Repositories.Judge.ComplexityRepository
         {
             return await _context.Complexity
                .Where(complexity => complexity.Id == complexityId)
+               .AsNoTracking()
                .SingleOrDefaultAsync();
         }
 
@@ -55,7 +56,9 @@ namespace ESA_api.Repositories.Judge.ComplexityRepository
 
         public async Task<List<Complexity>> GetComplexitysAsync()
         {
-            return await _context.Complexity.ToListAsync();
+            return await _context.Complexity
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task UpdateComplexityAsync(Complexity complexity)

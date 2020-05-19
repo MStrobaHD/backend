@@ -40,6 +40,7 @@ namespace ESA_api.Repositories.Common.CloudUploadRepository
         {
             return await _context.CloudAsset
                     .Where(asset => asset.UserId == userId)
+                    .AsNoTracking()
                     .ToListAsync();
         }
 
@@ -47,6 +48,7 @@ namespace ESA_api.Repositories.Common.CloudUploadRepository
         {
             return await _context.CloudAsset
                     .Where(asset => asset.UserId == userId)
+                    .AsNoTracking()
                     .ToListAsync();
         }
     }

@@ -11,6 +11,7 @@ namespace ESA_api.Services.Education.ExamService
         Task<List<ExamListDTO>> GetExamsAsync();
         Task<ExamDTO> GetExamAsync(int id);
         Task<List<ExamListDTO>> GetCourseExamsAsync(int courseId);
+        Task<List<ExamListDTO>> GetAvailableExamsAsync(int courseId, int userId);
         Task<int> AddExamAsync(ExamAddDTO examAddDTO);
         Task<int> UpdateExamAsync(int examId, ExamAddDTO examAddDTO);
         Task DeleteExamAsync(int examId);

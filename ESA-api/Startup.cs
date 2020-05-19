@@ -16,6 +16,7 @@ using ESA_api.Repositories.Education.ExamRepository;
 using ESA_api.Repositories.Education.ExamResultRepository;
 using ESA_api.Repositories.Education.FlashcardRepository;
 using ESA_api.Repositories.Education.FlashcardSerRepository;
+using ESA_api.Repositories.Education.GroupRepository;
 using ESA_api.Repositories.Education.LessonRepository;
 using ESA_api.Repositories.Education.QuestionRepository;
 using ESA_api.Repositories.Judge.AlgorithmCategoryRepository;
@@ -33,6 +34,7 @@ using ESA_api.Services.Education.ExamResultService;
 using ESA_api.Services.Education.ExamService;
 using ESA_api.Services.Education.FlashcardService;
 using ESA_api.Services.Education.FlashcardSetService;
+using ESA_api.Services.Education.GroupService;
 using ESA_api.Services.Education.LessonService;
 using ESA_api.Services.Education.QuestionService;
 using ESA_api.Services.Judge.AlgorithmCategoryService;
@@ -73,14 +75,22 @@ namespace ESA_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDatabaseContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDatabaseContext>(x =>
+            x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+            sqlServerOptionsAction: sqlOptions =>
+             {
+                 sqlOptions.EnableRetryOnFailure(
+                 maxRetryCount: 10,
+                 maxRetryDelay: TimeSpan.FromSeconds(30),
+                 errorNumbersToAdd: null);
+             }));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             services.AddDirectoryBrowser();
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            
+
 
             services.AddHttpContextAccessor();
             services.AddSwaggerGen(c =>
@@ -175,6 +185,9 @@ namespace ESA_api
             // User Controller
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IGroupService, GroupService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

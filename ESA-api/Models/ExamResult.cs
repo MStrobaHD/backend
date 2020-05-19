@@ -9,7 +9,7 @@ namespace ESA_api.Models
         public string Mark { get; set; }
         public int Points { get; set; }
         public int? MaxPoints { get; set; }
-        public int Percentage { get; set; }
+        public string ExamName { get; set; }
         public int ExamId { get; set; }
         public int UserId { get; set; }
 

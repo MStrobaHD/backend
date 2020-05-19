@@ -18,22 +18,30 @@ namespace ESA_api.Repositories.Common.StatisticsRepository
 
         public async Task<int> CountAlgorithmsTaskAsync()
         {
-            return await _context.AlgorithmTask.CountAsync();
+            return await _context.AlgorithmTask
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public async Task<int> CountAvailableCoursesAsync()
         {
-            return await _context.Course.CountAsync();
+            return await _context.Course
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public async Task<int> CountExamsAsync()
         {
-            return await _context.Exam.CountAsync();
+            return await _context.Exam
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public async Task<int> CountNegativeExamsAsync()
         {
-            return await _context.ExamResult.CountAsync();
+            return await _context.ExamResult
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public Task<int> CountPositiveExamsAsync()
@@ -48,7 +56,9 @@ namespace ESA_api.Repositories.Common.StatisticsRepository
 
         public async Task<int> CountRegisteredUsersAsync()
         {
-            return await _context.User.CountAsync();
+            return await _context.User
+                .AsNoTracking()
+                .CountAsync();
         }
 
         public Task<int> CountSolvedAlgorithmsAsync()

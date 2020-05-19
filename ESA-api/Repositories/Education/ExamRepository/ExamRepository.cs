@@ -45,12 +45,15 @@ namespace ESA_api.Repositories.Education.ExamRepository
         {
             return await _context.Exam
                 .Where(courseExams => courseExams.CourseId == courseId)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<Exam> GetExamAsync(int examId)
         {
-            return await _context.Exam.Where(exam => exam.Id == examId).SingleOrDefaultAsync();
+            return await _context.Exam.Where(exam => exam.Id == examId)
+
+                .AsNoTracking().SingleOrDefaultAsync();
         }
 
         public async Task<Exam> GetExamFromDatabaseAsync(int examId)
@@ -60,7 +63,9 @@ namespace ESA_api.Repositories.Education.ExamRepository
 
         public async Task<List<Exam>> GetExamsAsync()
         {
-            return await _context.Exam.ToListAsync();
+            return await _context.Exam
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         //public async Task<List<Exam>> GetExamsByTypeAsync(int examTypeId)
@@ -73,6 +78,7 @@ namespace ESA_api.Repositories.Education.ExamRepository
             return await _context.Exam
                .Where(exam => exam.Id == examId)
                .Include(exam => exam.MultiSelectQuestion)
+               .AsNoTracking()
                .SingleOrDefaultAsync();
         }
 
@@ -81,6 +87,7 @@ namespace ESA_api.Repositories.Education.ExamRepository
             return await _context.Exam
                .Where(exam => exam.Id == examId)
                .Include(exam => exam.OrderedBlock)
+               .AsNoTracking()
                .SingleOrDefaultAsync();
         }
 
@@ -89,6 +96,7 @@ namespace ESA_api.Repositories.Education.ExamRepository
             return await _context.Exam
                .Where(exam => exam.Id == examId)
                .Include(exam => exam.Question)
+               .AsNoTracking()
                .SingleOrDefaultAsync();
         }
 

@@ -63,9 +63,18 @@ namespace ESA_api.Repositories.Education.CourseRepository
             return await _context.CourseEnrolment.AnyAsync(enrolment => enrolment.UserId == userId & enrolment.CourseId == courseId);
         }
 
+        public async Task<CourseRating> GetActualRatingAsync(int courseId, int userId)
+        {
+            return await _context.CourseRating.Where(exp => exp.CourseId == courseId && exp.UserId == userId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+        }
+
         public async Task<Course> GetCourseAsync(int courseId)
         {
-            return await _context.Course.Where(course => course.Id == courseId).SingleOrDefaultAsync();
+            return await _context.Course.Where(course => course.Id == courseId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
         }
 
         public async Task<Course> GetCourseFromDatabaseAsync(int courseId)
@@ -75,24 +84,39 @@ namespace ESA_api.Repositories.Education.CourseRepository
 
         public async Task<List<Course>> GetCoursesAsync()
         {
-            return await _context.Course.ToListAsync();
+            return await _context.Course
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<Course>> GetCoursesByCategoryAsync(int categoryId)
         {
-            return await _context.Course.Where(course => course.CategoryId == categoryId).ToListAsync();
+            return await _context.Course.Where(course => course.CategoryId == categoryId)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<Course>> GetCoursesCreatedByUserAsync(int userId)
         {
-            return await _context.Course.Where(course => course.UserId == userId).ToListAsync();
+            return await _context.Course.Where(course => course.UserId == userId)
+                .AsNoTracking()
+                .ToListAsync();
         }
      
         public async Task<User> GetEnrolmentCoursesAsync(int userId)   //TODO Przenieść do innego repozytorium
         {
             return await _context.User
                 .Include(course => course.CourseEnrolment)
-                .ThenInclude(courseEnrolment => courseEnrolment.Course).Where(course => course.Id == userId).SingleOrDefaultAsync();
+                .ThenInclude(courseEnrolment => courseEnrolment.Course).Where(course => course.Id == userId)
+                .AsNoTracking()
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<List<CourseRating>> GetRateListByIdAsync(int id)
+        {
+            return await _context.CourseRating.Where(rate => rate.CourseId == id)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<List<Course>> GetRecommendedCoursesAsync(int userId)
@@ -138,11 +162,31 @@ namespace ESA_api.Repositories.Education.CourseRepository
             return enlistedCourses;
         }
 
+        public async Task<bool> isRatedAlready(int? courseId, int? userId)
+        {
+            var rating = await _context.CourseRating.Where(exp => exp.CourseId == courseId && exp.UserId == userId).SingleOrDefaultAsync();
+
+            if (rating != null)
+                return true;
+            return false;
+        }
+
+        public async Task RateAsync(CourseRating rating)
+        {
+            _context.CourseRating.Add(rating);
+            await _context.SaveChangesAsync(); ;
+        }
+
         public async Task UpdateCourseAsync(Course course)
         {
             _context.Entry(course).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateRatingAsync(CourseRating task)
+        {
+            _context.Entry(task).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 }

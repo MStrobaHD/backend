@@ -43,13 +43,16 @@ namespace ESA_api.Repositories.Judge.AlgorithmCategoryRepository
 
         public async Task<List<AlgorithmCategory>> GetAlgorithmCategoriesAsync()
         {
-            return await _context.AlgorithmCategory.ToListAsync();
+            return await _context.AlgorithmCategory
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<AlgorithmCategory> GetAlgorithmCategoryAsync(int algorithmCategoryId)
         {
             return await _context.AlgorithmCategory
                 .Where(algorithmCategory => algorithmCategory.Id == algorithmCategoryId)
+                .AsNoTracking()
                 .SingleOrDefaultAsync();
         }
 

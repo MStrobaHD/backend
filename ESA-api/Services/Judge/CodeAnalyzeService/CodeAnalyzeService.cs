@@ -27,11 +27,10 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
             var compilation = CSharpCompilation.Create("c", new[] { tree });
             var test = compilation.GetSemanticModel(tree);
 
-            //var test82 = SyntaxFactory.ParseStatement(source);
-            //var test3 = SyntaxFactory.ParseArgumentList(source);
             var model = compilation.GetSemanticModel(tree, ignoreAccessibility: true);
-            var methodBodySyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<BaseMethodDeclarationSyntax>().ToList();
-
+            var methodBodySyntax = tree.GetCompilationUnitRoot()
+                                       .DescendantNodes()
+                                       .OfType<BaseMethodDeclarationSyntax>().ToList();
 
             foreach (var method in methodBodySyntax)
             {
@@ -40,9 +39,6 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
                 var nodesWithConnection = GetNodesWithConnections(controlFlowGraph);
                 listOfMethods.Add(new MethodNode(methodName, nodesWithConnection));
             }
-
-
-
             return listOfMethods;
         }
         private string GetNameOfMethod(string methodCode)
@@ -87,16 +83,14 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
             return nodesWithConnection;
         }
 
-        public Metrics GetMetricsAsync(string code)
+        public MetricsSheet GetMetricsAsync(string code)
         {
             int cyclomaticComplexity = CountCyclomaticComplexity(code);
             int linesOfCode = CountAllLinesOfCode(code);
             int numberOfAssignment = CountAssignment(code);
             int numberOfDecision = CountDecision(code);
             int linesOfUncommentedLines = GetUncommentedLines(code);
-
-            // Tokens
-            var tokens = GetTokens(code);
+            
             int numberOfUniqueTokens = GetNumberOfUniqueTokens(code);
             int numberOfTokens = GetNumberOfTokens(code);
 
@@ -106,52 +100,38 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
             int uniqueOperands = GetUniqueOperands(code);
 
             // HALSTEAD METRICS
-
             int n1 = uniqueOperators; // Number of distinct operators.
             int n2 = uniqueOperands; // Number of distinct operands.
             int N1 = operators; // Total number of occurrences of operators.
             int N2 = operands; // Total number of occurrences of operands.
 
-            // Halstead Program Length – The total number of operator occurrences and the total number of operand occurrences. N = N1 + N2
+            // Halstead Program Length – N = N1 + N2
             int N = N1 + N2;
-            // Halstead Vocabulary – The total number of unique operator and unique operand occurrences. n = n1 + n2
+            // Halstead Vocabulary occurrences. n = n1 + n2
             int n = n1 + n2;
             // Program Volume V = Size * (log2 vocabulary) = N * log2(n)
             double V = N * Math.Log(Convert.ToDouble(n), Convert.ToDouble(2));
-            // Program Difficulty – This parameter shows how difficult to handle the program is.D = (n1 / 2) * (N2 / n2) || D = 1 / L
+            // Program Difficulty D = (n1 / 2) * (N2 / n2) || D = 1 / L
             double D = (n1 / 2) * (N2 / n2);
-            // Program Level – To rank the programming languages, the level of abstraction provided by the programming language,
-            // Program Level (L) is considered. The higher the level of a language, the less effort it takes to develop a program using that language. 
+            // Program Level 
             double L = 1 / D;
-            //Programming Effort – Measures the amount of mental activity needed to translate the existing algorithm into implementation in the specified program language.
-            //E = V / L = D * V = Difficulty * Volume
+            //Programming Effort E = V / L = D * V = Difficulty * Volume
             double E = D * V;
-            // Language Level – Shows the algorithm implementation program language level. The same algorithm demands additional effort if it is written in a low-level program language. For example, it is easier to program in Pascal than in Assembler.
+            // Language Level – Shows the algorithm implementation program language level.
             // L’ = V / D / D lambda = L * V * = L2 * V
             double L_prim = V / D / D;
-            // Intelligence Content – Determines the amount of intelligence presented (stated) in the program This parameter provides a measurement of program complexity, independently of the program language in which it was implemented.
-            //I = V / D
+            // Intelligence Content I = V / D
             double I = V / D;
-            // Programming Time – Shows time (in minutes) needed to translate the existing algorithm into implementation in the specified program language.
-            // T = E / (f * S)
+            // Programming Time T = E / (f * S)
             int f = 60; // seconds - to - minutes factor
             int S = 18; // Stroud moment per seconds
             double T = E / f ;
-            //int elementaryOperation = GetElementaryOperation(code);
 
-            Metrics metrics = new Metrics(cyclomaticComplexity,
-                                            linesOfCode,
-                                            linesOfUncommentedLines,
-                                            numberOfDecision,
-                                            numberOfAssignment,
-                                            numberOfTokens,
-                                            numberOfUniqueTokens,
-                                            uniqueOperators,
-                                            operators,
-                                            uniqueOperands,
-                                            operands,
-                                            N, n, V, D, L, E, L_prim, I, T);
-
+            MetricsSheet metrics = new MetricsSheet(cyclomaticComplexity,linesOfCode,
+                                            linesOfUncommentedLines, numberOfDecision,
+                                            numberOfAssignment,numberOfTokens,
+                                            numberOfUniqueTokens,uniqueOperators,operators,
+                                            uniqueOperands,operands,N, n, V, D, L, E, L_prim, I, T);
             return metrics;
         }
 

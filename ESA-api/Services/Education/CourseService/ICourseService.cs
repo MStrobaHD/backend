@@ -21,5 +21,6 @@ namespace ESA_api.Services.Education.CourseService
         Task DeleteCourseAsync(int courseId);
         Task<bool> FindCourseAsync(int courseId);
         Task<bool> CourseExistsAsync(int courseId);
+        Task<int> RateAsync(CourseRatingDTO ratingDTO);
     }
 }

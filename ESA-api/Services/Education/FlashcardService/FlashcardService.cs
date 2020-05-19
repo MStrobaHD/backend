@@ -13,7 +13,6 @@ namespace ESA_api.Services.Education.FlashcardService
     {
         private readonly IFlashcardRepository _repository;
         private readonly IMapper _mapper;
-
         public FlashcardService(IFlashcardRepository repository, IMapper mapper)
         {
            _repository = repository;
