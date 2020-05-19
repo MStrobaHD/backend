@@ -13,6 +13,15 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
 {
     public class CodeAnalyzeService : ICodeAnalyzeService
     {
+        string[] operatorsList = new string[] { "==", "!=", "=", "--", "++", "+", "-", "*", "/", "%", "@", ">", "<", ">=", "<=", "&&", "||", "|", "&", "!", "?",
+                                          ":", "~", "<<", ">>", "^", "+=", "-+", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=", "=>", "[", "]", "{", "}", "(",
+                                          ")", "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue",
+                                          "decimal", "default", "delegate", "do", "double", "enum", "event","explicit", "extern", "false", "finally", "float", "for",
+                                          "goto", "if", "implicit", "in", "int", "interface", "internal","is", "lock", "long", "namespace", "new", "null",
+                                          "object", "operator", "out", "override", "params", "private", "protected","public", "readonly", "ref", "return", "sbyte", "sealed",
+                                          "short", "sizeof", "stackalloc", "static", "string", "struct", "switch","this", "throw", "true", "typeof", "uint", "ulong",
+                                          "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile","while"};
+
         public CodeAnalyzeService()
         {
         }
@@ -200,17 +209,17 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
 
         private List<string> ExtractUniqueOperators(string code)
         {
-            string path = Directory.GetCurrentDirectory() + "\\Services\\Judge\\CodeAnalyzeService\\CodeAnalyzeModels\\operators.txt";
-            List<string> operators = new List<string>();
+            //string path = Directory.GetCurrentDirectory() + "\\Services\\Judge\\CodeAnalyzeService\\CodeAnalyzeModels\\operators.txt";
+           List<string> operators = new List<string>();
 
             var tokens = WriteTokensToList(code);
 
-            string text = System.IO.File.ReadAllText(path);
-            var operatorsFromFile = text.Split(';');
+            //string text = System.IO.File.ReadAllText(path);
+            //var operatorsFromFile = text.Split(';');
 
             foreach (var token in tokens)
             {
-                if (operatorsFromFile.Contains(token) && !operators.Contains(token))
+                if (operatorsList.Contains(token) && !operators.Contains(token))
                 {
                     operators.Add(token);
                 }
@@ -226,13 +235,13 @@ namespace ESA_api.Services.Judge.CodeAnalyzeService
             List<string> uniqeOperands = new List<string>();
             List<string> operands = new List<string>();
             var tokens = WriteTokensToList(code);
-            string path = Directory.GetCurrentDirectory() + "\\Services\\Judge\\CodeAnalyzeService\\CodeAnalyzeModels\\operators.txt"; List<string> operators = new List<string>();
-            string text = System.IO.File.ReadAllText(path);
-            var operatorsFromFile = text.Split(';');
+           // string path = Directory.GetCurrentDirectory() + "\\Services\\Judge\\CodeAnalyzeService\\CodeAnalyzeModels\\operators.txt"; List<string> operators = new List<string>();
+           // string text = System.IO.File.ReadAllText(path);
+           // var operatorsFromFile = text.Split(';');
 
             foreach (var token in tokens)
             {
-                if (!operatorsFromFile.Contains(token))
+                if (!operatorsList.Contains(token))
                 {
                     operands.Add(token);
                 }
